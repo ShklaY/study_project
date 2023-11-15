@@ -10,7 +10,7 @@ class WebTablesPage(HeaderSectionAndMenuBar):
         """цей метод відкриває Registration form"""
         self.click_on(By.CSS_SELECTOR, WebTablesPageLocators.BTN_ADD)
 
-    def fill_in_fields_on_the_registration_form(self) -> str:
+    def fill_all_fields(self) -> str:
         """цей метод дозволяє заповнити поля в Registration form"""
         self.set_data(By.CSS_SELECTOR, WebTablesPageLocators.TXT_FIRST_NAME, TestData.first_name)
         self.set_data(By.CSS_SELECTOR, WebTablesPageLocators.TXT_LAST_NAME, TestData.last_name)
@@ -31,9 +31,9 @@ class WebTablesPage(HeaderSectionAndMenuBar):
             txt_from_rows.append(i.text.replace('\n', ' '))
         return txt_from_rows
 
-    def search_by_email(self, email=TestData.email) -> str:
+    def set_email_in_search_field(self, email=TestData.email) -> str:
         """цей метод виконує пошук за ел адресою"""
-        self.wait_for_visibility_of_el(By.CSS_SELECTOR, WebTablesPageLocators.TXT_SEARCH).clear()
+        self.clear_field(By.CSS_SELECTOR, WebTablesPageLocators.TXT_SEARCH)
         self.set_data(By.CSS_SELECTOR, WebTablesPageLocators.TXT_SEARCH, email)
         return email
 
@@ -47,6 +47,7 @@ class WebTablesPage(HeaderSectionAndMenuBar):
 
     def remove_record(self) -> None:
         """цей метод видаляє новий запис з таблиці"""
+        self.remove_advertising_in_footer()
         self.click_on(By.CSS_SELECTOR, WebTablesPageLocators.BTN_DELETE)
 
     def get_the_checking_text(self) -> str:

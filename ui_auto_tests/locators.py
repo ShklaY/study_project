@@ -62,9 +62,6 @@ class WebTablesPageLocators:
     BTN_THE_QUANTITY_OF_ROWS = 'select[aria-label="rows per page"]'
 
 
-h = 'result_table'.upper()
-print(h)
-
 class PracticeFormPageLocators:
     TXT_FIRST_NAME = '[id="firstName"]'
     TXT_LAST_NAME = '[id="lastName"]'

@@ -6,8 +6,6 @@ from ui_auto_tests.page_objects.header_section_and_menu_bar import HeaderSection
 
 
 class PracticeFormPage(HeaderSectionAndMenuBar):
-    """сторінка Practice Form: містить локатори веб елементів та методи для взаємодії з ними"""
-
     def set_student_registration_form(self) -> tuple:
         """введення імені, прізвища, емейлу, №тел; вибір гендеру"""
         self.remove_advertising_in_footer()

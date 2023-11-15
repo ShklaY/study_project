@@ -1,6 +1,6 @@
 from ui_auto_tests.page_objects.checkbox_page import CheckBoxPage
 from ui_auto_tests.page_objects.forms_page import FormsPage
-from ui_auto_tests.page_objects.page_base import BasePage
+from ui_auto_tests.page_objects.base_page import BasePage
 from ui_auto_tests.page_objects.elements_page import ElementsPage
 from ui_auto_tests.page_objects.practiceform_page import PracticeFormPage
 from ui_auto_tests.page_objects.radiobutton_page import RadioButtonPage
@@ -9,14 +9,14 @@ from ui_auto_tests.page_objects.webtables_page import WebTablesPage
 
 
 class TestTextBoxPage:
-    def test_text_box_page(self, driver_chrome):
+    def test_send_text_boxes(self, driver_chrome):
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_text_box()
         textbox_pg = TextBoxPage(driver_chrome)
         page_title = textbox_pg.get_title()
         assert page_title == 'Text Box', f" title 'Text Box' =! '{page_title}' "
 
-        input_full_name, input_email, input_current_addr, input_permanent_addr = textbox_pg.set_user_data()
+        input_full_name, input_email, input_current_addr, input_permanent_addr = textbox_pg.fill_all_text_boxes()
         textbox_pg.click_on_btn_submit()
         output_full_name, output_email, output_current_address, output_permanent_address = textbox_pg.get_output_user_data()
 
@@ -27,7 +27,7 @@ class TestTextBoxPage:
 
 
 class TestCheckBoxPage:
-    def test_check_box_page(self, driver_chrome):
+    def test_check_boxes(self, driver_chrome):
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_check_box()
         checkbox_pg = CheckBoxPage(driver_chrome)
@@ -44,7 +44,7 @@ class TestCheckBoxPage:
 
 
 class TestRadioButtonPage:
-    def test_radio_button_page(self, driver_chrome):
+    def test_radio_buttons(self, driver_chrome):
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_radio_button()
         radiobutton_pg = RadioButtonPage(driver_chrome)
@@ -58,57 +58,57 @@ class TestRadioButtonPage:
 
 
 class TestWebTablesPage:
-    def test_web_tables_page(self, driver_chrome):
+    def test_add_record(self, driver_chrome):
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_web_tables()
         web_tables_pg = WebTablesPage(driver_chrome)
         page_title = web_tables_pg.get_title()
         assert page_title == "Web Tables", f" title 'Web Tables' =! '{page_title}' "
-
         """додавання нового запису в таблицю"""
         web_tables_pg.click_on_btn_add()
-        input_data = web_tables_pg.fill_in_fields_on_the_registration_form()
+        input_data = web_tables_pg.fill_all_fields()
         web_tables_pg.click_on_btn_submit()
         output_data = web_tables_pg.get_text_from_rows()
         """перевірка чи новий запис додано в таблицю"""
         assert input_data in output_data, f"{input_data} is not in {output_data}"
 
-        """виконання пошуку по емейлу"""
-        search_email = web_tables_pg.search_by_email()
-        output_data_after_performing_the_search = web_tables_pg.get_text_from_rows()
-        first_result_field = output_data_after_performing_the_search[0]
+    def test_search_new_record_by_email(self, driver_chrome):
+        web_tables_pg = WebTablesPage(driver_chrome)
+        search_email = web_tables_pg.set_email_in_search_field()
+        search_result = web_tables_pg.get_text_from_rows()
+        first_field_in_search_result = search_result[0]
         """перевірка чи є емейл в першому рядку результату пошуку"""
-        assert search_email in first_result_field, f"{search_email} != email in the result search"
+        assert search_email in first_field_in_search_result, f"{search_email} != email in the result search"
 
-        """апдейт емейлу"""
+    def test_update_email(self, driver_chrome):
+        web_tables_pg = WebTablesPage(driver_chrome)
         new_email = web_tables_pg.set_new_email()
-
         """пошук по новому емейлу, перевірка чи є він в першому рядку результату пошуку"""
-        web_tables_pg.search_by_email(new_email)
-        output_data_after_performing_the_search_with_a_new_email = web_tables_pg.get_text_from_rows()
-        first_result_field_with_a_new_email = output_data_after_performing_the_search_with_a_new_email[0]
-        assert new_email in first_result_field_with_a_new_email, f"{new_email} != new email in the new result search"
+        web_tables_pg.set_email_in_search_field(new_email)
+        search_result = web_tables_pg.get_text_from_rows()
+        first_field_in_search_result = search_result[0]
+        assert new_email in first_field_in_search_result, f"{new_email} != new email in the new result search"
 
-        """видалення реклами в футері"""
-        web_tables_pg.remove_advertising_in_footer()
-        """видалення нового запису з таблиці"""
+    def test_remove_new_record(self, driver_chrome):
+        web_tables_pg = WebTablesPage(driver_chrome)
         web_tables_pg.remove_record()
         the_checking_text = web_tables_pg.get_the_checking_text()
-        assert the_checking_text == 'No rows found', 'after removing a new record, the message "No rows found" does not appear'
+        assert the_checking_text == 'No rows found', 'new_record doesnt deleted'
 
+    def test_quantity_of_rows(self, driver_chrome):
         """перевірка чи обрані опції к-сті рядків відповідають фактичній к-сті рядків відображених на сторінці"""
+        web_tables_pg = WebTablesPage(driver_chrome)
         list_of_clicked_options, list_of_counted_rows = web_tables_pg.quantity_of_rows()
         assert list_of_clicked_options == list_of_counted_rows, "quantity of_clicked_options != quantity of_counted_rows"
 
 
-class TestForms:
-    def test_practice_form(self, driver_chrome):
+class TestPracticeFormPage:
+    def test_registration_new_student(self, driver_chrome):
         BasePage(driver_chrome).click_on_btn_forms()
         FormsPage(driver_chrome).click_on_btn_practice_form()
         practice_form_pg = PracticeFormPage(driver_chrome)
         page_title = practice_form_pg.get_title()
         assert page_title == 'Practice Form', f" title 'Practice Form' =! '{page_title}' "
-
         """заповнення форми реєстрації студента"""
         inp_first_name, inp_last_name, inp_email, inp_gender, inp_mobile, inp_subject, inp_hobby, inp_address, inp_state, inp_city = practice_form_pg.set_student_registration_form()
 

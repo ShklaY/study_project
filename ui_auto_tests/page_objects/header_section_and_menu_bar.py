@@ -7,7 +7,7 @@ class HeaderSectionAndMenuBar(BaseMethods):
     """хедер сайту і панель меню"""
 
     def get_title(self) -> str:
-        return self.wait_for_visibility_of_el(By.CSS_SELECTOR, HeaderLocators.HEADER).text
+        return self.get_text(By.CSS_SELECTOR, HeaderLocators.HEADER)
 
     def click_on_btn_text_box(self) -> None:
         self.click_on(By.XPATH, MenuBarLocators.BTN_TEXT_BOX)
