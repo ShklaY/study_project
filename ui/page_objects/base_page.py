@@ -1,6 +1,6 @@
-from ui_auto_tests.helper import BaseMethods
+from ui.helper import BaseMethods
 from selenium.webdriver.common.by import By
-from ui_auto_tests.locators import InitPageLocators
+from ui.locators import InitPageLocators
 
 
 class BasePage(BaseMethods):

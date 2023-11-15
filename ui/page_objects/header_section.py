@@ -1,14 +1,9 @@
 from selenium.webdriver.common.by import By
-from ui_auto_tests.helper import BaseMethods
-from ui_auto_tests.locators import MenuBarLocators, HeaderLocators
+from ui.helper import BaseMethods
+from ui.locators import MenuBarLocators, HeaderLocators
 
 
-class HeaderSectionAndMenuBar(BaseMethods):
-    """хедер сайту і панель меню"""
-
-    def get_title(self) -> str:
-        return self.get_text(By.CSS_SELECTOR, HeaderLocators.HEADER)
-
+class MenuBar(BaseMethods):
     def click_on_btn_text_box(self) -> None:
         self.click_on(By.XPATH, MenuBarLocators.BTN_TEXT_BOX)
 

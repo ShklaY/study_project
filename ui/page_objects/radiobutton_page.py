@@ -1,9 +1,9 @@
-from ui_auto_tests.page_objects.header_section_and_menu_bar import HeaderSectionAndMenuBar
+from ui.page_objects.header_section import MenuBar
 from selenium.webdriver.common.by import By
-from ui_auto_tests.locators import RadioButtonPageLocators
+from ui.locators import RadioButtonPageLocators
 
 
-class RadioButtonPage(HeaderSectionAndMenuBar):
+class RadioButtonPage(MenuBar):
     def click_on_radio_buttons_and_get_output_text(self) -> tuple:
         """цей метод повертає списки: 1й містить усі назви клікнутих радіобатонів,
         2й список - назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """

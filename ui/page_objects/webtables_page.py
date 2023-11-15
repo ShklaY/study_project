@@ -1,11 +1,11 @@
-from ui_auto_tests.data import TestData
-from ui_auto_tests.page_objects.header_section_and_menu_bar import HeaderSectionAndMenuBar
+from ui.data import TestData
+from ui.page_objects.header_section import MenuBar
 from selenium.webdriver.common.by import By
-from ui_auto_tests.locators import WebTablesPageLocators
+from ui.locators import WebTablesPageLocators
 from selenium.webdriver.support.select import Select
 
 
-class WebTablesPage(HeaderSectionAndMenuBar):
+class WebTablesPage(MenuBar):
     def click_on_btn_add(self) -> None:
         """цей метод відкриває Registration form"""
         self.click_on(By.CSS_SELECTOR, WebTablesPageLocators.BTN_ADD)

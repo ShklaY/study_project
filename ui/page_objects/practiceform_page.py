@@ -1,11 +1,11 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from ui_auto_tests.locators import PracticeFormPageLocators
-from ui_auto_tests.data import TestData, DataStateAndCity
-from ui_auto_tests.page_objects.header_section_and_menu_bar import HeaderSectionAndMenuBar
+from ui.locators import PracticeFormPageLocators
+from ui.data import TestData, DataStateAndCity
+from ui.page_objects.header_section import MenuBar
 
 
-class PracticeFormPage(HeaderSectionAndMenuBar):
+class PracticeFormPage(MenuBar):
     def set_student_registration_form(self) -> tuple:
         """введення імені, прізвища, емейлу, №тел; вибір гендеру"""
         self.remove_advertising_in_footer()

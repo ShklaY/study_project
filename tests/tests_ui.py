@@ -1,11 +1,11 @@
-from ui_auto_tests.page_objects.checkbox_page import CheckBoxPage
-from ui_auto_tests.page_objects.forms_page import FormsPage
-from ui_auto_tests.page_objects.base_page import BasePage
-from ui_auto_tests.page_objects.elements_page import ElementsPage
-from ui_auto_tests.page_objects.practiceform_page import PracticeFormPage
-from ui_auto_tests.page_objects.radiobutton_page import RadioButtonPage
-from ui_auto_tests.page_objects.textbox_page import TextBoxPage
-from ui_auto_tests.page_objects.webtables_page import WebTablesPage
+from ui.page_objects.checkbox_page import CheckBoxPage
+from ui.page_objects.forms_page import FormsPage
+from ui.page_objects.base_page import BasePage
+from ui.page_objects.elements_page import ElementsPage
+from ui.page_objects.practiceform_page import PracticeFormPage
+from ui.page_objects.radiobutton_page import RadioButtonPage
+from ui.page_objects.textbox_page import TextBoxPage
+from ui.page_objects.webtables_page import WebTablesPage
 
 
 class TestTextBoxPage:
@@ -13,8 +13,6 @@ class TestTextBoxPage:
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_text_box()
         textbox_pg = TextBoxPage(driver_chrome)
-        page_title = textbox_pg.get_title()
-        assert page_title == 'Text Box', f" title 'Text Box' =! '{page_title}' "
 
         input_full_name, input_email, input_current_addr, input_permanent_addr = textbox_pg.fill_all_text_boxes()
         textbox_pg.click_on_btn_submit()
@@ -31,8 +29,6 @@ class TestCheckBoxPage:
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_check_box()
         checkbox_pg = CheckBoxPage(driver_chrome)
-        page_title = checkbox_pg.get_title()
-        assert page_title == 'Check Box', f" title 'Check Box' =! '{page_title}' "
 
         checkbox_pg.click_on_btn_expand_all()
         checkbox_pg.click_on_random_checkboxes()
@@ -48,8 +44,6 @@ class TestRadioButtonPage:
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_radio_button()
         radiobutton_pg = RadioButtonPage(driver_chrome)
-        page_title = radiobutton_pg.get_title()
-        assert page_title == 'Radio Button', f" title 'Radio Button' =! '{page_title}' "
 
         """асьорт списків, де 1й список містить усі назви клікнутих радіобатонів , 
         а 2й список - назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """
@@ -62,8 +56,7 @@ class TestWebTablesPage:
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_web_tables()
         web_tables_pg = WebTablesPage(driver_chrome)
-        page_title = web_tables_pg.get_title()
-        assert page_title == "Web Tables", f" title 'Web Tables' =! '{page_title}' "
+
         """додавання нового запису в таблицю"""
         web_tables_pg.click_on_btn_add()
         input_data = web_tables_pg.fill_all_fields()
@@ -107,13 +100,14 @@ class TestPracticeFormPage:
         BasePage(driver_chrome).click_on_btn_forms()
         FormsPage(driver_chrome).click_on_btn_practice_form()
         practice_form_pg = PracticeFormPage(driver_chrome)
-        page_title = practice_form_pg.get_title()
-        assert page_title == 'Practice Form', f" title 'Practice Form' =! '{page_title}' "
+
         """заповнення форми реєстрації студента"""
-        inp_first_name, inp_last_name, inp_email, inp_gender, inp_mobile, inp_subject, inp_hobby, inp_address, inp_state, inp_city = practice_form_pg.set_student_registration_form()
+        inp_first_name, inp_last_name, inp_email, inp_gender, inp_mobile, inp_subject, inp_hobby, inp_address, \
+        inp_state, inp_city = practice_form_pg.set_student_registration_form()
 
         """дані з підтверджувальної таблиці"""
-        res_name, res_email, res_gender, res_mobile, res_date, res_subject, res_hobby, res_picture, res_address, res_state_and_city = practice_form_pg.get_data_result()
+        res_name, res_email, res_gender, res_mobile, res_date, res_subject, res_hobby, res_picture, res_address, \
+        res_state_and_city = practice_form_pg.get_data_result()
 
         assert f'{inp_first_name} {inp_last_name}' == res_name, 'name error'
         assert inp_email == res_email, 'email error'

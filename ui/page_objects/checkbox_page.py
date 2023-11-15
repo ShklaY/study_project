@@ -1,10 +1,10 @@
-from ui_auto_tests.page_objects.header_section_and_menu_bar import HeaderSectionAndMenuBar
+from ui.page_objects.header_section import MenuBar
 from selenium.webdriver.common.by import By
-from ui_auto_tests.locators import CheckBoxPageLocators
+from ui.locators import CheckBoxPageLocators
 import random
 
 
-class CheckBoxPage(HeaderSectionAndMenuBar):
+class CheckBoxPage(MenuBar):
     def click_on_btn_expand_all(self) -> None:
         self.click_on(By.CSS_SELECTOR, CheckBoxPageLocators.BTN_EXPAND_ALL)
 
