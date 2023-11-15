@@ -1,70 +1,55 @@
-import time
-from ui_auto_tests.page_objects.page_checkbox import CheckBoxPage
-from ui_auto_tests.page_objects.page_forms import FormsPage
-from ui_auto_tests.page_objects.page_base import InitPage
-from ui_auto_tests.page_objects.page_elements import ElementsPage
-from ui_auto_tests.page_objects.page_practiceform import PracticeFormPage
-from ui_auto_tests.page_objects.page_radiobutton import RadioButtonPage
-from ui_auto_tests.page_objects.page_textbox import TextBoxPage
-from ui_auto_tests.page_objects.page_webtables import WebTablesPage
+from ui_auto_tests.page_objects.checkbox_page import CheckBoxPage
+from ui_auto_tests.page_objects.forms_page import FormsPage
+from ui_auto_tests.page_objects.page_base import BasePage
+from ui_auto_tests.page_objects.elements_page import ElementsPage
+from ui_auto_tests.page_objects.practiceform_page import PracticeFormPage
+from ui_auto_tests.page_objects.radiobutton_page import RadioButtonPage
+from ui_auto_tests.page_objects.textbox_page import TextBoxPage
+from ui_auto_tests.page_objects.webtables_page import WebTablesPage
 
 
 class TestTextBoxPage:
     def test_text_box_page(self, driver_chrome):
-        InitPage(driver_chrome).click_on_btn_elements()
-        """відклилась стрінка Elements"""
+        BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_text_box()
-        """відкрилась стрінка TextBox після кліку на кнпку text_box в меню на стрінці Elements"""
         textbox_pg = TextBoxPage(driver_chrome)
-        textbox_pg_header_name = textbox_pg.get_header_name()
-        """перевірка тайтлу сторінки: """
-        assert textbox_pg_header_name == 'Text Box', f" title 'Text Box' =! '{textbox_pg_header_name}' "
-        """заповнення полей: ім'я, емейл, адреса та клік submit"""
-        input_full_name = textbox_pg.set_full_name()
-        input_email = textbox_pg.set_email()
-        input_current_address = textbox_pg.set_current_address()
-        input_permanent_address = textbox_pg.set_permanent_address()
-        textbox_pg.remove_advertising_in_footer()
-        textbox_pg.scroll_and_click_on_btn_submit()
-        """поміщаю в змінні вихідні дані: ім'я, емейл, адреси"""
-        output_full_name = textbox_pg.get_output_full_name()
-        output_email = textbox_pg.get_output_email()
-        output_current_address = textbox_pg.get_output_current_address()
-        output_permanent_address = textbox_pg.get_output_permanent_address()
+        page_title = textbox_pg.get_title()
+        assert page_title == 'Text Box', f" title 'Text Box' =! '{page_title}' "
+
+        input_full_name, input_email, input_current_addr, input_permanent_addr = textbox_pg.set_user_data()
+        textbox_pg.click_on_btn_submit()
+        output_full_name, output_email, output_current_address, output_permanent_address = textbox_pg.get_output_user_data()
 
         assert output_full_name == input_full_name, f"input:'{input_full_name}' =! output:'{output_full_name}' "
         assert output_email == input_email, f"input:'{input_email}' =! output:'{output_email}' "
-        assert output_current_address == input_current_address, f"input:'{input_current_address}' =! output:'{output_current_address}' "
-        assert output_permanent_address == input_permanent_address, f"input:'{input_permanent_address}' =! output:'{output_permanent_address}' "
-        print(output_full_name, output_email, output_current_address, output_permanent_address)
+        assert output_current_address == input_current_addr, f"input:'{input_current_addr}' =! output:'{output_current_address}' "
+        assert output_permanent_address == input_permanent_addr, f"input:'{input_permanent_addr}' =! output:'{output_permanent_address}' "
+
 
 class TestCheckBoxPage:
     def test_check_box_page(self, driver_chrome):
-        InitPage(driver_chrome).click_on_btn_elements()
+        BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_check_box()
-        time.sleep(3)
         checkbox_pg = CheckBoxPage(driver_chrome)
-        checkbox_pg_header_name = checkbox_pg.get_header_name()
-        """перевірка тайтлу сторінки: """
-        assert checkbox_pg_header_name == 'Check Box', f" title 'Check Box' =! '{checkbox_pg_header_name}' "
+        page_title = checkbox_pg.get_title()
+        assert page_title == 'Check Box', f" title 'Check Box' =! '{page_title}' "
+
         checkbox_pg.click_on_btn_expand_all()
         checkbox_pg.click_on_random_checkboxes()
         """назви всіх відмічених чекбоксів"""
         titles_of_checked_checkboxes = checkbox_pg.get_titles_of_checked_checkboxes()
         """назви чекбоксів, що виводяться в рядку 'You have selected' """
         output_result = checkbox_pg.get_output_result()
-
         assert titles_of_checked_checkboxes == output_result
 
 
 class TestRadioButtonPage:
     def test_radio_button_page(self, driver_chrome):
-        InitPage(driver_chrome).click_on_btn_elements()
+        BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_radio_button()
         radiobutton_pg = RadioButtonPage(driver_chrome)
-        radiobutton_pg_header_name = radiobutton_pg.get_header_name()
-        """перевірка тайтлу сторінки: """
-        assert radiobutton_pg_header_name == 'Radio Button', f" title 'Radio Button' =! '{radiobutton_pg_header_name}' "
+        page_title = radiobutton_pg.get_title()
+        assert page_title == 'Radio Button', f" title 'Radio Button' =! '{page_title}' "
 
         """асьорт списків, де 1й список містить усі назви клікнутих радіобатонів , 
         а 2й список - назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """
@@ -74,12 +59,11 @@ class TestRadioButtonPage:
 
 class TestWebTablesPage:
     def test_web_tables_page(self, driver_chrome):
-        InitPage(driver_chrome).click_on_btn_elements()
+        BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_web_tables()
         web_tables_pg = WebTablesPage(driver_chrome)
-        web_tables_pg_header_name = web_tables_pg.get_header_name()
-        """перевірка тайтлу сторінки: """
-        assert web_tables_pg_header_name == "Web Tables", f" title 'Web Tables' =! '{web_tables_pg_header_name}' "
+        page_title = web_tables_pg.get_title()
+        assert page_title == "Web Tables", f" title 'Web Tables' =! '{page_title}' "
 
         """додавання нового запису в таблицю"""
         web_tables_pg.click_on_btn_add()
@@ -90,8 +74,7 @@ class TestWebTablesPage:
         assert input_data in output_data, f"{input_data} is not in {output_data}"
 
         """виконання пошуку по емейлу"""
-        search_email = web_tables_pg.perform_search_by_email()
-        time.sleep(3)
+        search_email = web_tables_pg.search_by_email()
         output_data_after_performing_the_search = web_tables_pg.get_text_from_rows()
         first_result_field = output_data_after_performing_the_search[0]
         """перевірка чи є емейл в першому рядку результату пошуку"""
@@ -101,7 +84,7 @@ class TestWebTablesPage:
         new_email = web_tables_pg.set_new_email()
 
         """пошук по новому емейлу, перевірка чи є він в першому рядку результату пошуку"""
-        web_tables_pg.perform_search_by_email(new_email)
+        web_tables_pg.search_by_email(new_email)
         output_data_after_performing_the_search_with_a_new_email = web_tables_pg.get_text_from_rows()
         first_result_field_with_a_new_email = output_data_after_performing_the_search_with_a_new_email[0]
         assert new_email in first_result_field_with_a_new_email, f"{new_email} != new email in the new result search"
@@ -120,16 +103,13 @@ class TestWebTablesPage:
 
 class TestForms:
     def test_practice_form(self, driver_chrome):
-        InitPage(driver_chrome).click_on_btn_forms()
-        """відклилась стрінка Forms"""
+        BasePage(driver_chrome).click_on_btn_forms()
         FormsPage(driver_chrome).click_on_btn_practice_form()
-        """відклилась стрінка Practice Form"""
         practice_form_pg = PracticeFormPage(driver_chrome)
-        practice_form_pg_header_name = practice_form_pg.get_header_name()
-        assert practice_form_pg_header_name == 'Practice Form', f" title 'Practice Form' =! '{practice_form_pg_header_name}' "
+        page_title = practice_form_pg.get_title()
+        assert page_title == 'Practice Form', f" title 'Practice Form' =! '{page_title}' "
 
-        """видалення реклами в футері, що перекриває кнопку submit; заповнення форми реєстрації студента"""
-        practice_form_pg.remove_advertising_in_footer()
+        """заповнення форми реєстрації студента"""
         inp_first_name, inp_last_name, inp_email, inp_gender, inp_mobile, inp_subject, inp_hobby, inp_address, inp_state, inp_city = practice_form_pg.set_student_registration_form()
 
         """дані з підтверджувальної таблиці"""

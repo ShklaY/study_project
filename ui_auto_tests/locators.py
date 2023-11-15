@@ -2,85 +2,88 @@ import random
 
 
 class InitPageLocators:
-    btn_elements = '//*[@id="app"]/div/div/div[2]/div/div[1]'
-    btn_forms = '//*[@id="app"]/div/div/div[2]/div/div[2]'
+    BTN_ELEMENTS = '//*[@id="app"]/div/div/div[2]/div/div[1]'
+    BTN_FORMS = '//*[@id="app"]/div/div/div[2]/div/div[2]'
 
 
 class HeaderLocators:
-    header = 'div[class="main-header"]'
+    HEADER = 'div[class="main-header"]'
 
 
 class MenuBarLocators:
-    menu_btn_text_box = '//span[text()="Text Box"]'
-    menu_btn_check_box = '//span[text()="Check Box"]'
-    menu_btn_radio_button = '//span[text()="Radio Button"]'
-    menu_btn_web_tables = '//span[text()="Web Tables"]'
-    menu_btn_practice_form = '//span[text()="Practice Form"]'
+    BTN_TEXT_BOX = '//span[text()="Text Box"]'
+    BTN_CHECK_BOX = '//span[text()="Check Box"]'
+    BTN_RADIO_BUTTON = '//span[text()="Radio Button"]'
+    BTN_WEB_TABLES = '//span[text()="Web Tables"]'
+    BTN_PRACTICE_FORM = '//span[text()="Practice Form"]'
 
 
 class TextBoxPageLocators:
-    txt_full_name = 'input[id="userName"]'
-    txt_email = 'input[id="userEmail"]'
-    txt_current_address = 'textarea[id="currentAddress"]'
-    txt_permanent_address = 'textarea[id="permanentAddress"]'
-    btn_submit = 'button[id="submit"]'
+    TXT_FULL_NAME = 'input[id="userName"]'
+    TXT_EMAIL = 'input[id="userEmail"]'
+    TXT_CURRENT_ADDRESS = 'textarea[id="currentAddress"]'
+    TXT_PERMANENT_ADDRESS = 'textarea[id="permanentAddress"]'
+    BTN_SUBMIT = 'button[id="submit"]'
 
-    output_full_name = 'p[id="name"]'
-    output_email = 'p[id="email"]'
-    output_current_address = 'p[id="currentAddress"]'
-    output_permanent_address = 'p[id="permanentAddress"]'
+    OUTPUT_FULL_NAME = 'p[id="name"]'
+    OUTPUT_EMAIL = 'p[id="email"]'
+    OUTPUT_CURRENT_ADDRESS = 'p[id="currentAddress"]'
+    OUTPUT_PERMANENT_ADDRESS = 'p[id="permanentAddress"]'
 
 
 class CheckBoxPageLocators:
-    btn_expand_all = 'button[title="Expand all"]'
-    titles_of_checkboxes = '[class="rct-title"]'
+    BTN_EXPAND_ALL = 'button[title="Expand all"]'
+    TITLES_OF_CHECKBOXES = '[class="rct-title"]'
 
 
 class RadioButtonPageLocators:
-    radio_buttons = "//label[contains(@class, 'custom-control-label')]"
-    output_text = '[class="text-success"]'
+    RADIO_BUTTONS = "//label[contains(@class, 'custom-control-label')]"
+    OUTPUT_TEXT = '[class="text-success"]'
 
-    preceding_sibling_for_radio_btns = ".//preceding-sibling::input"
+    PRECEDING_SIBLING_FOR_RADIO_BTNS = ".//preceding-sibling::input"
 
 
 class WebTablesPageLocators:
-    btn_add = 'button[id="addNewRecordButton"]'
-    txt_first_name = 'input[id="firstName"]'
-    txt_last_name = 'input[id="lastName"]'
-    txt_user_email = 'input[id="userEmail"]'
-    txt_age = 'input[id="age"]'
-    txt_salary = 'input[id="salary"]'
-    txt_department = 'input[id="department"]'
-    btn_submit = 'button[id="submit"]'
-    rows = 'div[class="rt-tr-group"]'
+    BTN_ADD = 'button[id="addNewRecordButton"]'
+    TXT_FIRST_NAME = 'input[id="firstName"]'
+    TXT_LAST_NAME = 'input[id="lastName"]'
+    TXT_USER_EMAIL = 'input[id="userEmail"]'
+    TXT_AGE = 'input[id="age"]'
+    TXT_SALARY = 'input[id="salary"]'
+    TXT_DEPARTMENT = 'input[id="department"]'
+    BTN_SUBMIT = 'button[id="submit"]'
+    ROWS = 'div[class="rt-tr-group"]'
 
-    txt_search = 'input[id="searchBox"]'
-    btn_edit = '[title="Edit"]'
-    btn_delete = '[title="Delete"]'
-    the_checking_text = '[class="rt-noData"]'
+    TXT_SEARCH = 'input[id="searchBox"]'
+    BTN_EDIT = '[title="Edit"]'
+    BTN_DELETE = '[title="Delete"]'
+    THE_CHECKING_TEXT = '[class="rt-noData"]'
 
-    btn_the_quantity_of_rows = 'select[aria-label="rows per page"]'
+    BTN_THE_QUANTITY_OF_ROWS = 'select[aria-label="rows per page"]'
 
+
+h = 'result_table'.upper()
+print(h)
 
 class PracticeFormPageLocators:
-    txt_first_name = '[id="firstName"]'
-    txt_last_name = '[id="lastName"]'
-    txt_email = '[id="userEmail"]'
-    radio_btn_gender = f'[for="gender-radio-{random.randint(1,3)}"]'
-    txt_mobile_number = '[id="userNumber"]'
-    date_of_birth = '[id="dateOfBirthInput"]'
-    txt_subjects = 'input[id="subjectsInput"]'
-    hobbies = f'[for="hobbies-checkbox-{random.randint(1,3)}"]'
-    picture = ''
-    txt_current_address = '[id="currentAddress"]'
+    TXT_FIRST_NAME = '[id="firstName"]'
+    TXT_LAST_NAME = '[id="lastName"]'
+    TXT_EMAIL = '[id="userEmail"]'
+    RADIO_BTN_GENDER = f'[for="gender-radio-{random.randint(1, 3)}"]'
+    TXT_MOBILE_NUMBER = '[id="userNumber"]'
+    DATE_OF_BIRTH = '[id="dateOfBirthInput"]'
+    TXT_SUBJECTS = 'input[id="subjectsInput"]'
+    HOBBIES = f'[for="hobbies-checkbox-{random.randint(1, 3)}"]'
+    PICTURE = ''
+    TXT_CURRENT_ADDRESS = '[id="currentAddress"]'
 
-    select_state = 'div[id="state"]'
-    locator_input_state = 'input[id="react-select-3-input"]'
-    select_city = 'div[id="city"]'
-    locator_input_city = 'input[id="react-select-4-input"]'
-    btn_submit = '[id="submit"]'
+    SELECT_STATE = 'div[id="state"]'
+    LOCATOR_INPUT_STATE = 'input[id="react-select-3-input"]'
+    SELECT_CITY = 'div[id="city"]'
+    LOCATOR_INPUT_CITY = 'input[id="react-select-4-input"]'
+    BTN_SUBMIT = '[id="submit"]'
 
-    result_table = '//tr/td[2]'
+    RESULT_TABLE = '//tr/td[2]'
 
 
 

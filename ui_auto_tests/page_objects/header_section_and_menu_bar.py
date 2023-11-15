@@ -6,21 +6,21 @@ from ui_auto_tests.locators import MenuBarLocators, HeaderLocators
 class HeaderSectionAndMenuBar(BaseMethods):
     """хедер сайту і панель меню"""
 
-    def get_header_name(self) -> str:
-        return self.wait_for_visibility_of_el(By.CSS_SELECTOR, HeaderLocators.header).text
+    def get_title(self) -> str:
+        return self.wait_for_visibility_of_el(By.CSS_SELECTOR, HeaderLocators.HEADER).text
 
     def click_on_btn_text_box(self) -> None:
-        self.wait_for_visibility_of_el(By.XPATH, MenuBarLocators.menu_btn_text_box).click()
+        self.click_on(By.XPATH, MenuBarLocators.BTN_TEXT_BOX)
 
     def click_on_btn_check_box(self) -> None:
-        self.wait_for_visibility_of_el(By.XPATH, MenuBarLocators.menu_btn_check_box).click()
+        self.click_on(By.XPATH, MenuBarLocators.BTN_CHECK_BOX)
 
     def click_on_btn_radio_button(self) -> None:
-        self.wait_for_visibility_of_el(By.XPATH, MenuBarLocators.menu_btn_radio_button).click()
+        self.click_on(By.XPATH, MenuBarLocators.BTN_RADIO_BUTTON)
 
     def click_on_btn_web_tables(self) -> None:
-        self.wait_for_visibility_of_el(By.XPATH, MenuBarLocators.menu_btn_web_tables).click()
+        self.click_on(By.XPATH, MenuBarLocators.BTN_WEB_TABLES)
 
     def click_on_btn_practice_form(self) -> None:
-        self.wait_for_visibility_of_el(By.XPATH, MenuBarLocators.menu_btn_practice_form).click()
+        self.click_on(By.XPATH, MenuBarLocators.BTN_PRACTICE_FORM)
 
