@@ -1,5 +1,5 @@
 from ui.data import TestData
-from ui.page_objects.header_section import MenuBar
+from ui.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from ui.locators import WebTablesPageLocators
 from selenium.webdriver.support.select import Select
@@ -31,7 +31,7 @@ class WebTablesPage(MenuBar):
             txt_from_rows.append(i.text.replace('\n', ' '))
         return txt_from_rows
 
-    def set_email_in_search_field(self, email=TestData.email) -> str:
+    def set_email_in_search_field(self, email: str = TestData.email) -> str:
         """цей метод виконує пошук за ел адресою"""
         self.clear_field(By.CSS_SELECTOR, WebTablesPageLocators.TXT_SEARCH)
         self.set_data(By.CSS_SELECTOR, WebTablesPageLocators.TXT_SEARCH, email)

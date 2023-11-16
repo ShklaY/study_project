@@ -1,4 +1,4 @@
-from ui.page_objects.header_section import MenuBar
+from ui.page_objects.menu_bar import MenuBar
 
 
 class ElementsPage(MenuBar):

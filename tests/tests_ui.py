@@ -25,7 +25,7 @@ class TestTextBoxPage:
 
 
 class TestCheckBoxPage:
-    def test_check_boxes(self, driver_chrome):
+    def test_click_on_check_boxes(self, driver_chrome):
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_check_box()
         checkbox_pg = CheckBoxPage(driver_chrome)
@@ -36,11 +36,11 @@ class TestCheckBoxPage:
         titles_of_checked_checkboxes = checkbox_pg.get_titles_of_checked_checkboxes()
         """назви чекбоксів, що виводяться в рядку 'You have selected' """
         output_result = checkbox_pg.get_output_result()
-        assert titles_of_checked_checkboxes == output_result
+        assert titles_of_checked_checkboxes == output_result, "clicked checkboxes != row result with checked checkboxes"
 
 
 class TestRadioButtonPage:
-    def test_radio_buttons(self, driver_chrome):
+    def test_click_on_radio_buttons(self, driver_chrome):
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_radio_button()
         radiobutton_pg = RadioButtonPage(driver_chrome)

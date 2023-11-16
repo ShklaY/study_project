@@ -1,7 +1,7 @@
 from data_base.helper_db import DataBaseConnection
 
 
-class CrudQueries(DataBaseConnection):
+class BaseQueries(DataBaseConnection):
     def select_all(self, table_name: str) -> list:
         return self.get_all_rows(f'SELECT * FROM {table_name}')
 

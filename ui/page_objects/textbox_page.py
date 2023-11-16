@@ -1,4 +1,4 @@
-from ui.page_objects.header_section import MenuBar
+from ui.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from ui.locators import TextBoxPageLocators
 from ui.data import TestData

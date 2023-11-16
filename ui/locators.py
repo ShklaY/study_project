@@ -6,10 +6,6 @@ class InitPageLocators:
     BTN_FORMS = '//*[@id="app"]/div/div/div[2]/div/div[2]'
 
 
-class HeaderLocators:
-    HEADER = 'div[class="main-header"]'
-
-
 class MenuBarLocators:
     BTN_TEXT_BOX = '//span[text()="Text Box"]'
     BTN_CHECK_BOX = '//span[text()="Check Box"]'
@@ -34,6 +30,9 @@ class TextBoxPageLocators:
 class CheckBoxPageLocators:
     BTN_EXPAND_ALL = 'button[title="Expand all"]'
     TITLES_OF_CHECKBOXES = '[class="rct-title"]'
+    ICON_CHECK = '[class="rct-icon rct-icon-check"]'
+    ancestor_for_checked_checkboxes = './/ancestor::span[@class="rct-text"]'
+    SELECTED_CHECKBOXES = '//div/span[@class="text-success"]'
 
 
 class RadioButtonPageLocators:

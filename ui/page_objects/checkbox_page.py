@@ -1,4 +1,4 @@
-from ui.page_objects.header_section import MenuBar
+from ui.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from ui.locators import CheckBoxPageLocators
 import random
@@ -18,18 +18,18 @@ class CheckBoxPage(MenuBar):
             random_checkbox.click()
 
     def get_titles_of_checked_checkboxes(self) -> list:
-        """цей метод повертає назви всіх відмічених чекбоксів"""
-        checked_checkboxes = self.wait_for_visibility_of_all_elements(By.CSS_SELECTOR, '[class="rct-icon rct-icon-check"]')
-        ancestor_for_checked_checkboxes = './/ancestor::span[@class="rct-text"]'
+        """повертає назви всіх відмічених чекбоксів"""
+        checked_checkboxes = self.wait_for_visibility_of_all_elements(By.CSS_SELECTOR, CheckBoxPageLocators.ICON_CHECK)
+
         titles_of_checked_checkboxes = []
         for i in checked_checkboxes:
-            find_ancestor = i.find_element(By.XPATH, ancestor_for_checked_checkboxes)
+            find_ancestor = i.find_element(By.XPATH, CheckBoxPageLocators.ancestor_for_checked_checkboxes)
             titles_of_checked_checkboxes.append(find_ancestor.text.lower().replace(".doc", '').replace(" ", ''))
         return titles_of_checked_checkboxes
 
     def get_output_result(self) -> list:
-        """цей метод повертає назви чекбоксів, що виводяться в рядку 'You have selected' """
-        row_of_selected_checkboxes = self.wait_for_visibility_of_all_elements(By.XPATH, '//div/span[@class="text-success"]')
+        """повертає назви чекбоксів, що виводяться в рядку 'You have selected' """
+        row_of_selected_checkboxes = self.wait_for_visibility_of_all_elements(By.XPATH, CheckBoxPageLocators.SELECTED_CHECKBOXES)
         list_of_selected_checkboxes = []
         for i in row_of_selected_checkboxes:
             list_of_selected_checkboxes.append(i.text.lower().replace(" ", ''))

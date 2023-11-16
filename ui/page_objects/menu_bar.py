@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from ui.helper import BaseMethods
-from ui.locators import MenuBarLocators, HeaderLocators
+from ui.locators import MenuBarLocators
 
 
 class MenuBar(BaseMethods):

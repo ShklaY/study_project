@@ -2,7 +2,7 @@ from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from ui.locators import PracticeFormPageLocators
 from ui.data import TestData, DataStateAndCity
-from ui.page_objects.header_section import MenuBar
+from ui.page_objects.menu_bar import MenuBar
 
 
 class PracticeFormPage(MenuBar):
