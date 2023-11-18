@@ -5,6 +5,7 @@ import random
 
 @dataclass
 class TestData:
+    # TODO why do we initialize faker here?
     fake = Faker(locale='uk_UA')
     full_name: str = fake.name()
     email: str = fake.email()

@@ -9,6 +9,7 @@ class BaseQueries(DataBaseConnection):
         return self.get_one_row(f'SELECT id FROM {table_name} WHERE name="{tc_name}"')
 
     def insert(self, table_name: str, data: tuple) -> None:
+        # TODO 2 update method's data argument to use Model class
         self.commit_changes(f"INSERT INTO {table_name} (description, author_id, name) VALUES {data};")
 
     def update(self, table_name: str, old_descrip: str, new_descrip: str) -> None:

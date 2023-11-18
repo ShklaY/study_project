@@ -1,0 +1,12 @@
+- [ ] 18.11.23
+  - [ ] structure updates
+    - [ ] delete .idea
+    - [ ] delete __pycache__
+    - [ ] data_base directory should be renamed
+    - [ ] data_base/data_db.py file should be renamed, structure should be changed
+    - [ ] data_base/helper_db file should be renamed
+    - [ ] ui directory should be renamed
+    - [ ] ui/helper.py wrong file name
+  - [ ] TODO 1 Facade pattern for selenium wrapper
+  - [ ] tests_db TODO 2
+  - [ ] tests_ui TODO 3

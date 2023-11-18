@@ -3,9 +3,11 @@ from data_base.data_db import Data
 
 
 class TestDataBase:
+    # TODO 2 what is this testcase_id ?
     testcase_id = None
 
     def test_get_all_test_cases(self, get_db):
+        # TODO 2 why do you need get_db fixture? BaseQueries?
         all_test_cases = BaseQueries().select_all(Data.table_name)
         assert len(all_test_cases) == 12, "quantity of test cases != 12"
 
@@ -13,6 +15,7 @@ class TestDataBase:
         BaseQueries().insert(Data.table_name, (Data.tc_description, Data.tc_author_id, Data.tc_name))
         id_test_case = BaseQueries().select_id_by_name(Data.table_name, Data.tc_name)
         tests_after = BaseQueries().select_all(Data.table_name)
+        # TODO 2 too complex: assert () ....
         assert (id_test_case, Data.tc_description, Data.tc_author_id, Data.tc_name) in tests_after, "new record isnt added"
         TestDataBase.testcase_id = id_test_case
 

@@ -22,6 +22,7 @@ class CheckBoxPage(MenuBar):
         checked_checkboxes = self.wait_for_visibility_of_all_elements(By.CSS_SELECTOR, CheckBoxPageLocators.ICON_CHECK)
 
         titles_of_checked_checkboxes = []
+        # TODO i - bad naming for temp variable, checked_checkbox - is better
         for i in checked_checkboxes:
             find_ancestor = i.find_element(By.XPATH, CheckBoxPageLocators.ancestor_for_checked_checkboxes)
             titles_of_checked_checkboxes.append(find_ancestor.text.lower().replace(".doc", '').replace(" ", ''))
@@ -31,6 +32,7 @@ class CheckBoxPage(MenuBar):
         """повертає назви чекбоксів, що виводяться в рядку 'You have selected' """
         row_of_selected_checkboxes = self.wait_for_visibility_of_all_elements(By.XPATH, CheckBoxPageLocators.SELECTED_CHECKBOXES)
         list_of_selected_checkboxes = []
+        # TODO i - bad naming for temp variable
         for i in row_of_selected_checkboxes:
             list_of_selected_checkboxes.append(i.text.lower().replace(" ", ''))
         return list_of_selected_checkboxes

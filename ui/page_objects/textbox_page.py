@@ -6,6 +6,7 @@ from ui.data import TestData
 
 class TextBoxPage(MenuBar):
     def fill_all_text_boxes(self) -> tuple:
+        # TODO 3 wrong data import, data should be get as method argument
         fill_full_name = self.set_data(By.CSS_SELECTOR, TextBoxPageLocators.TXT_FULL_NAME, TestData.full_name)
         fill_email = self.set_data(By.CSS_SELECTOR, TextBoxPageLocators.TXT_EMAIL, TestData.email)
         fill_current_address = self.set_data(By.CSS_SELECTOR, TextBoxPageLocators.TXT_CURRENT_ADDRESS, TestData.current_address)

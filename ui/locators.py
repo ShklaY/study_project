@@ -2,6 +2,7 @@ import random
 
 
 class InitPageLocators:
+    # TODO 3 locators should be defined in page object
     BTN_ELEMENTS = '//*[@id="app"]/div/div/div[2]/div/div[1]'
     BTN_FORMS = '//*[@id="app"]/div/div/div[2]/div/div[2]'
 

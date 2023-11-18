@@ -10,6 +10,7 @@ from ui.page_objects.webtables_page import WebTablesPage
 
 class TestTextBoxPage:
     def test_send_text_boxes(self, driver_chrome):
+        # TODO 3 reuse with App fixture that will have all pages inside
         BasePage(driver_chrome).click_on_btn_elements()
         ElementsPage(driver_chrome).click_on_btn_text_box()
         textbox_pg = TextBoxPage(driver_chrome)
@@ -18,6 +19,7 @@ class TestTextBoxPage:
         textbox_pg.click_on_btn_submit()
         output_full_name, output_email, output_current_address, output_permanent_address = textbox_pg.get_output_user_data()
 
+        # TODO 3 use Assert library or create your own one
         assert output_full_name == input_full_name, f"input:'{input_full_name}' =! output:'{output_full_name}' "
         assert output_email == input_email, f"input:'{input_email}' =! output:'{output_email}' "
         assert output_current_address == input_current_addr, f"input:'{input_current_addr}' =! output:'{output_current_address}' "

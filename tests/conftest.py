@@ -5,6 +5,7 @@ from data_base.helper_db import DataBaseConnection
 
 @pytest.fixture(scope="class")
 def driver_chrome():
+    # TODO 1 should be reimplemented with selenium wrapper
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get('https://demoqa.com/')
