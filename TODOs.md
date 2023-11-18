@@ -7,6 +7,7 @@
     - [ ] data_base/helper_db file should be renamed
     - [ ] ui directory should be renamed
     - [ ] ui/helper.py wrong file name
+    - [ ] update project structure according to https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html
   - [ ] TODO 1 Facade pattern for selenium wrapper
   - [ ] tests_db TODO 2
   - [ ] tests_ui TODO 3
