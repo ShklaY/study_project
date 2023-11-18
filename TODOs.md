@@ -1,6 +1,6 @@
 - [ ] 18.11.23
   - [ ] structure updates
-    - [ ] delete .idea
+    - [x] delete .idea
     - [ ] delete __pycache__
     - [ ] data_base directory should be renamed
     - [ ] data_base/data_db.py file should be renamed, structure should be changed
