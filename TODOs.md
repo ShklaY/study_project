@@ -1,13 +1,13 @@
-- [ ] 18.11.23
-  - [ ] structure updates
+- [x] 18.11.23
+  - [x] structure updates
     - [x] delete .idea
-    - [ ] delete __pycache__
-    - [ ] data_base directory should be renamed
-    - [ ] data_base/data_db.py file should be renamed, structure should be changed
-    - [ ] data_base/helper_db file should be renamed
-    - [ ] ui directory should be renamed
-    - [ ] ui/helper.py wrong file name
-    - [ ] update project structure according to https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html
-  - [ ] TODO 1 Facade pattern for selenium wrapper
-  - [ ] tests_db TODO 2
-  - [ ] tests_ui TODO 3
+    - [x] delete __pycache__
+    - [x] data_base directory should be renamed
+    - [x] data_base/data_db.py file should be renamed, structure should be changed
+    - [x] data_base/helper_db file should be renamed
+    - [x] ui directory should be renamed
+    - [x] ui/helper.py wrong file name
+    - [x] update project structure according to https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html
+  - [x] TODO 1 Facade pattern for selenium wrapper
+  - [x] tests_db TODO 2
+  - [x] tests_ui TODO 3
