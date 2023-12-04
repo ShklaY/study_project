@@ -3,7 +3,6 @@ from assertpy import assert_that
 
 class TestTextBoxPage:
     def test_send_text_boxes(self, all_pages, input_user_data):
-        # TODO 3 reuse with App fixture that will have all pages inside
         all_pages.base_pg.click_on_btn_elements()
         all_pages.elements_pg.click_on_btn_text_box()
         all_pages.textbox_pg.fill_text_boxes(
@@ -14,7 +13,6 @@ class TestTextBoxPage:
         all_pages.textbox_pg.click_on_btn_submit()
 
         output_full_name, output_email, output_current_address, output_permanent_address = all_pages.textbox_pg.get_output_user_data()
-        # TODO 3 use Assert library or create your own one
         assert_that(output_full_name).is_equal_to(input_user_data.full_name).described_as("input name != output")
         assert_that(output_email).is_equal_to(input_user_data.email).described_as("email != output")
         assert_that(output_current_address).is_equal_to(input_user_data.current_address).described_as("curr_address != output")

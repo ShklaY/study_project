@@ -6,24 +6,23 @@ import random
 
 
 class PracticeFormPage(MenuBar):
-    TXT_FIRST_NAME = '[id="firstName"]'
-    TXT_LAST_NAME = '[id="lastName"]'
-    TXT_EMAIL = '[id="userEmail"]'
-    RADIO_BTN_GENDER = f'[for="gender-radio-{random.randint(1, 3)}"]'
-    TXT_MOBILE_NUMBER = '[id="userNumber"]'
-    DATE_OF_BIRTH = '[id="dateOfBirthInput"]'
-    TXT_SUBJECTS = 'input[id="subjectsInput"]'
-    HOBBIES = f'[for="hobbies-checkbox-{random.randint(1, 3)}"]'
-    PICTURE = ''
-    TXT_CURRENT_ADDRESS = '[id="currentAddress"]'
+    TXT_FIRST_NAME = (By.CSS_SELECTOR, '[id="firstName"]')
+    TXT_LAST_NAME = (By.CSS_SELECTOR, '[id="lastName"]')
+    TXT_EMAIL = (By.CSS_SELECTOR, '[id="userEmail"]')
+    RADIO_BTN_GENDER = (By.CSS_SELECTOR, f'[for="gender-radio-{random.randint(1, 3)}"]')
+    TXT_MOBILE_NUMBER = (By.CSS_SELECTOR, '[id="userNumber"]')
+    DATE_OF_BIRTH = (By.CSS_SELECTOR, '[id="dateOfBirthInput"]')
+    TXT_SUBJECTS = (By.CSS_SELECTOR, 'input[id="subjectsInput"]')
+    HOBBIES = (By.CSS_SELECTOR, f'[for="hobbies-checkbox-{random.randint(1, 3)}"]')
+    TXT_CURRENT_ADDRESS = (By.CSS_SELECTOR, '[id="currentAddress"]')
 
-    SELECT_STATE = 'div[id="state"]'
-    LOCATOR_INPUT_STATE = 'input[id="react-select-3-input"]'
-    SELECT_CITY = 'div[id="city"]'
-    LOCATOR_INPUT_CITY = 'input[id="react-select-4-input"]'
-    BTN_SUBMIT = '[id="submit"]'
+    SELECT_STATE = (By.CSS_SELECTOR, 'div[id="state"]')
+    LOCATOR_INPUT_STATE = (By.CSS_SELECTOR, 'input[id="react-select-3-input"]')
+    SELECT_CITY = (By.CSS_SELECTOR, 'div[id="city"]')
+    LOCATOR_INPUT_CITY = (By.CSS_SELECTOR, 'input[id="react-select-4-input"]')
+    BTN_SUBMIT = (By.CSS_SELECTOR, '[id="submit"]')
 
-    RESULT_TABLE = '//tr/td[2]'
+    RESULT_TABLE = (By.XPATH, '//tr/td[2]')
 
     def set_new_student(self,
                         first_name: UserModel,
@@ -34,43 +33,40 @@ class PracticeFormPage(MenuBar):
                         current_address: UserModel,
                         state: UserModel,
                         city: UserModel) -> tuple:
-        self.remove_advertising_in_footer()
-        self.set_data(By.CSS_SELECTOR, PracticeFormPage.TXT_FIRST_NAME, first_name)
-        self.set_data(By.CSS_SELECTOR, PracticeFormPage.TXT_LAST_NAME, last_name)
-        self.set_data(By.CSS_SELECTOR, PracticeFormPage.TXT_EMAIL, email)
+        self.remove_advertising_in_footer() \
+            .set_data(PracticeFormPage.TXT_FIRST_NAME, first_name) \
+            .set_data(PracticeFormPage.TXT_LAST_NAME, last_name) \
+            .set_data(PracticeFormPage.TXT_EMAIL, email) \
+            .click_on(PracticeFormPage.RADIO_BTN_GENDER) \
+            .set_data(PracticeFormPage.TXT_MOBILE_NUMBER, phone_number) \
+            .helper(PracticeFormPage.TXT_SUBJECTS, subject) \
+            .click_on(PracticeFormPage.HOBBIES) \
+            .set_data(PracticeFormPage.TXT_CURRENT_ADDRESS, current_address) \
+            .click_on(PracticeFormPage.SELECT_STATE) \
+            .helper(PracticeFormPage.LOCATOR_INPUT_STATE, state) \
+            .click_on(PracticeFormPage.SELECT_CITY) \
+            .helper(PracticeFormPage.LOCATOR_INPUT_CITY, city) \
+            .click_on(PracticeFormPage.BTN_SUBMIT)
 
-        self.click_on(By.CSS_SELECTOR, PracticeFormPage.RADIO_BTN_GENDER)
-        chosen_gender = self.get_text(By.CSS_SELECTOR, PracticeFormPage.RADIO_BTN_GENDER)
-
-        self.set_data(By.CSS_SELECTOR, PracticeFormPage.TXT_MOBILE_NUMBER, phone_number)
-        """вибір предмету* """
-        self.helper(PracticeFormPage.TXT_SUBJECTS, subject)
-        """вибір хоббі, введення адреси"""
-        self.click_on(By.CSS_SELECTOR, PracticeFormPage.HOBBIES)
-        chosen_hobby = self.get_text(By.CSS_SELECTOR, PracticeFormPage.HOBBIES)
-
-        self.set_data(By.CSS_SELECTOR, PracticeFormPage.TXT_CURRENT_ADDRESS, current_address)
-        """вибір штату* """
-        self.click_on(By.CSS_SELECTOR, PracticeFormPage.SELECT_STATE)
-        self.helper(PracticeFormPage.LOCATOR_INPUT_STATE, state)
-        """вибір міста* """
-        self.click_on(By.CSS_SELECTOR, PracticeFormPage.SELECT_CITY)
-        self.helper(PracticeFormPage.LOCATOR_INPUT_CITY, city)
-        """клік на кнпку submit"""
-        self.click_on(By.CSS_SELECTOR, PracticeFormPage.BTN_SUBMIT)
+        chosen_gender = self.get_text(PracticeFormPage.RADIO_BTN_GENDER)
+        chosen_hobby = self.get_text(PracticeFormPage.HOBBIES)
         return chosen_gender, chosen_hobby
 
-    def helper(self, locator: str, data: UserModel) -> None:
+    def helper(self, locator: tuple, data: UserModel) -> 'PracticeFormPage':
         """допоміжний метод для взаємодії з полями Subjects, State and City"""
-        self.set_data(By.CSS_SELECTOR, locator, data)
-        self.wait_for_visibility_of_el(By.CSS_SELECTOR, locator).send_keys(Keys.ENTER)
+        self.set_data(locator, data) \
+            .wait_for_visibility_of_el(locator).send_keys(Keys.ENTER)
+        return self
 
     def get_data_of_registered_student(self) -> list:
         """цей метод повертає дані з підтверджувальної таблиці"""
-        table = self.wait_for_visibility_of_all_elements(By.XPATH, PracticeFormPage.RESULT_TABLE)
-        list_with_data_of_registered_student = []
-        for row in table:
-            list_with_data_of_registered_student.append(row.text)
+        # table = self.wait_for_visibility_of_all_elements(PracticeFormPage.RESULT_TABLE)
+        # list_with_data_of_registered_student = []
+        # for row in table:
+        #     list_with_data_of_registered_student.append(row.text)
+        # return list_with_data_of_registered_student
+        table = self.wait_for_visibility_of_all_elements(PracticeFormPage.RESULT_TABLE)
+        list_with_data_of_registered_student = [row.text for row in table]
         return list_with_data_of_registered_student
 
 

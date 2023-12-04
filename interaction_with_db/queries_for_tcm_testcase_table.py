@@ -13,7 +13,6 @@ class QueriesForTcmTestcaseTable(MethodsToHelpInteractWithDB):
         return self.get_id(f'SELECT id FROM tcm_testcase WHERE name="{tc_name}"')
 
     def insert(self, description: TestCaseModel, author_id: TestCaseModel, name: TestCaseModel) -> None:
-        # TODO 2 update method's data argument to use Model class
         self.commit_changes(f"INSERT INTO tcm_testcase (description, author_id, name) VALUES ('{description}', '{author_id}', '{name}');")
 
     def update(self, old_descrip: TestCaseModel, new_descrip: TestCaseModel) -> None:

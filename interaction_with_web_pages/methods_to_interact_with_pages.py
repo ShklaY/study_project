@@ -9,34 +9,36 @@ class MethodsToInteractWithPages:
         self.driver = driver
         self.wait = WebDriverWait(driver, timeout=15)
 
-    def wait_for_visibility_of_el(self, locator_type: str, locator: str) -> WebElement:
+    def wait_for_visibility_of_el(self, locator: tuple) -> WebElement:
         """Цей метод очікує, поки е-нт стане видимим на стрінці"""
-        return self.wait.until(EC.visibility_of_element_located((locator_type, locator)))
+        return self.wait.until(EC.visibility_of_element_located(locator))
 
-    def click_on(self, locator_type: str, locator: str) -> None:
-        self.wait_for_visibility_of_el(locator_type, locator).click()
+    def click_on(self, locator: tuple) -> 'MethodsToInteractWithPages':
+        self.wait_for_visibility_of_el(locator).click()
+        return self
 
-    def set_data(self, locator_type: str, locator: str, user: UserModel):
-        self.wait_for_visibility_of_el(locator_type, locator).send_keys(user)
-        return user
+    def set_data(self, locator: tuple, user: UserModel) -> 'MethodsToInteractWithPages':
+        self.wait_for_visibility_of_el(locator).send_keys(user)
+        return self
 
-    def get_text(self, locator_type: str, locator: str) -> str:
-        return self.wait_for_visibility_of_el(locator_type, locator).text
+    def get_text(self, locator: tuple) -> str:
+        return self.wait_for_visibility_of_el(locator).text
 
-    def clear_field(self, locator_type: str, locator: str) -> None:
-        self.wait_for_visibility_of_el(locator_type, locator).clear()
+    def clear_field(self, locator: tuple) -> None:
+        self.wait_for_visibility_of_el(locator).clear()
 
-    def wait_for_visibility_of_all_elements(self, locator_type: str, locator: str) -> list:
+    def wait_for_visibility_of_all_elements(self, locator: tuple) -> list:
         """Цей метод очікує, поки ЕЛЕМЕНТИ стануть видимии на стрінці"""
-        return self.wait.until(EC.visibility_of_all_elements_located((locator_type, locator)))
+        return self.wait.until(EC.visibility_of_all_elements_located(locator))
 
-    def scroll_js(self, locator_type: str, locator: str) -> None:
+    def scroll_js(self, locator: tuple) -> None:
         """Цей метод переміщує курсор миші до заданого ел-та за доп JS"""
-        self.driver.execute_script('arguments[0].scrollIntoView();', self.wait_for_visibility_of_el(locator_type, locator))
+        self.driver.execute_script('arguments[0].scrollIntoView();', self.wait_for_visibility_of_el(locator))
 
-    def remove_advertising_in_footer(self) -> None:
+    def remove_advertising_in_footer(self) -> 'MethodsToInteractWithPages':
         """Цей метод видаляє рекламу в футері, яка перекриває веб-елементи"""
         self.driver.execute_script('document.getElementById("adplus-anchor").remove();')
         self.driver.execute_script('document.getElementsByTagName("footer")[0].remove();')
         self.driver.execute_script('document.getElementById("close-fixedban").remove();')
+        return self
 

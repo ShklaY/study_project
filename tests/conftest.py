@@ -11,7 +11,6 @@ from config import DATABASE_PATH
 
 @pytest.fixture(scope="class")
 def all_pages():
-    # TODO 1 should be reimplemented with selenium wrapper
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get('https://demoqa.com/')

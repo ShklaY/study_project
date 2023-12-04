@@ -3,10 +3,8 @@ from assertpy import assert_that
 
 
 class TestTcmTestcaseTable:
-    # TODO 2 what is this testcase_id ?
 
     def test_get_all_test_cases(self, queries_for_tcm_testcase_table):
-        # TODO 2 why do you need get_db fixture? BaseQueries?
         all_test_cases = queries_for_tcm_testcase_table.select_all()
         assert_that(len(all_test_cases), "quantity of test cases != 12").is_equal_to(12)
 
@@ -16,7 +14,6 @@ class TestTcmTestcaseTable:
         id_tc = queries_for_tcm_testcase_table.select_id_by_name(new_tc_data.tc_name)
         new_test_case = id_tc, new_tc_data.tc_description, new_tc_data.tc_author_id, new_tc_data.tc_name
         all_test_cases = queries_for_tcm_testcase_table.select_all()
-        # TODO 2 too complex: assert () ....
         assert_that(all_test_cases).contains(new_test_case)
 
         # update new_record
