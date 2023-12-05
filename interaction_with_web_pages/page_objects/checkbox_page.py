@@ -34,7 +34,6 @@ class CheckBoxPage(MenuBar):
     def get_output_result(self) -> list:
         """повертає назви чекбоксів, що виводяться в рядку 'You have selected' """
         result_row_of_selected_checkboxes = self.wait_for_visibility_of_all_elements(CheckBoxPage.RESULT_ROW_OF_SELECTED_CHECKBOXES)
-        list_of_selected_checkboxes = []
-        for selected_checkbox in result_row_of_selected_checkboxes:
-            list_of_selected_checkboxes.append(selected_checkbox.text.lower().replace(" ", ''))
+        list_of_selected_checkboxes = [selected_checkbox.text.lower().replace(" ", '')
+                                       for selected_checkbox in result_row_of_selected_checkboxes]
         return list_of_selected_checkboxes

@@ -28,12 +28,12 @@ class WebTablesPage(MenuBar):
 
     def fill_all_fields(self, first_name: UserModel, last_name: UserModel, email: UserModel, age: UserModel, salary: UserModel, department: UserModel) -> str:
         """цей метод дозволяє заповнити поля в Registration form"""
-        self.set_data(WebTablesPage.TXT_FIRST_NAME, first_name)
-        self.set_data(WebTablesPage.TXT_LAST_NAME, last_name)
-        self.set_data(WebTablesPage.TXT_USER_EMAIL, email)
-        self.set_data(WebTablesPage.TXT_AGE, age)
-        self.set_data(WebTablesPage.TXT_SALARY, salary)
-        self.set_data(WebTablesPage.TXT_DEPARTMENT, department)
+        self.set_data(WebTablesPage.TXT_FIRST_NAME, first_name)\
+            .set_data(WebTablesPage.TXT_LAST_NAME, last_name)\
+            .set_data(WebTablesPage.TXT_USER_EMAIL, email)\
+            .set_data(WebTablesPage.TXT_AGE, age)\
+            .set_data(WebTablesPage.TXT_SALARY, salary)\
+            .set_data(WebTablesPage.TXT_DEPARTMENT, department)
         return f'{first_name} {last_name} {age} {email} {salary} {department}'
 
     def click_on_btn_submit(self) -> None:
@@ -42,26 +42,24 @@ class WebTablesPage(MenuBar):
     def get_text_from_rows(self) -> list:
         """цей метод повертає список значень всіх рядків таблиці"""
         list_rows = self.wait_for_visibility_of_all_elements(WebTablesPage.ROWS)
-        txt_from_rows = []
-        for row in list_rows:
-            txt_from_rows.append(row.text.replace('\n', ' '))
+        txt_from_rows = [row.text.replace('\n', ' ') for row in list_rows]
         return txt_from_rows
 
     def set_email_in_search_field(self, email: UserModel) -> None:
         """цей метод виконує пошук за ел адресою"""
-        self.clear_field(WebTablesPage.TXT_SEARCH)
-        self.set_data(WebTablesPage.TXT_SEARCH, email)
+        self.clear_field(WebTablesPage.TXT_SEARCH)\
+            .set_data(WebTablesPage.TXT_SEARCH, email)
 
     def update_email(self, new_email: UserModel) -> None:
-        self.click_on(WebTablesPage.BTN_EDIT)
-        self.clear_field(WebTablesPage.TXT_USER_EMAIL)
-        self.set_data(WebTablesPage.TXT_USER_EMAIL, new_email)
-        self.click_on_btn_submit()
+        self.click_on(WebTablesPage.BTN_EDIT)\
+            .clear_field(WebTablesPage.TXT_USER_EMAIL)\
+            .set_data(WebTablesPage.TXT_USER_EMAIL, new_email)\
+            .click_on_btn_submit()
 
     def remove_new_record(self) -> None:
         """цей метод видаляє новий запис з таблиці"""
-        self.remove_advertising_in_footer()
-        self.click_on(WebTablesPage.BTN_DELETE)
+        self.remove_advertising_in_footer()\
+            .click_on(WebTablesPage.BTN_DELETE)
 
     def get_the_checking_text(self) -> str:
         """цей метод повертає текст, який підтверджує, що рядок з заданим емейлом не знайдено """

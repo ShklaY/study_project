@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from interaction_with_web_pages.user_model import UserModel
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 import random
+from typing import Self
 
 
 class PracticeFormPage(MenuBar):
@@ -52,7 +53,7 @@ class PracticeFormPage(MenuBar):
         chosen_hobby = self.get_text(PracticeFormPage.HOBBIES)
         return chosen_gender, chosen_hobby
 
-    def helper(self, locator: tuple, data: UserModel) -> 'PracticeFormPage':
+    def helper(self, locator: tuple, data: UserModel) -> Self:
         """допоміжний метод для взаємодії з полями Subjects, State and City"""
         self.set_data(locator, data) \
             .wait_for_visibility_of_el(locator).send_keys(Keys.ENTER)
@@ -60,11 +61,6 @@ class PracticeFormPage(MenuBar):
 
     def get_data_of_registered_student(self) -> list:
         """цей метод повертає дані з підтверджувальної таблиці"""
-        # table = self.wait_for_visibility_of_all_elements(PracticeFormPage.RESULT_TABLE)
-        # list_with_data_of_registered_student = []
-        # for row in table:
-        #     list_with_data_of_registered_student.append(row.text)
-        # return list_with_data_of_registered_student
         table = self.wait_for_visibility_of_all_elements(PracticeFormPage.RESULT_TABLE)
         list_with_data_of_registered_student = [row.text for row in table]
         return list_with_data_of_registered_student

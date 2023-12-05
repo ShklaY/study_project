@@ -16,15 +16,15 @@ class TextBoxPage(MenuBar):
     OUTPUT_PERMANENT_ADDRESS = (By.CSS_SELECTOR, 'p[id="permanentAddress"]')
 
     def fill_text_boxes(self, full_name: UserModel, email: UserModel, current_address: UserModel, permanent_address: UserModel) -> None:
-        self.set_data(TextBoxPage.TXT_FULL_NAME, full_name)
-        self.set_data(TextBoxPage.TXT_EMAIL, email)
-        self.set_data(TextBoxPage.TXT_CURRENT_ADDRESS, current_address)
-        self.set_data(TextBoxPage.TXT_PERMANENT_ADDRESS, permanent_address)
+        self.set_data(TextBoxPage.TXT_FULL_NAME, full_name)\
+            .set_data(TextBoxPage.TXT_EMAIL, email)\
+            .set_data(TextBoxPage.TXT_CURRENT_ADDRESS, current_address)\
+            .set_data(TextBoxPage.TXT_PERMANENT_ADDRESS, permanent_address)
 
     def click_on_btn_submit(self) -> None:
-        self.remove_advertising_in_footer()
-        self.scroll_js(TextBoxPage.BTN_SUBMIT)
-        self.click_on(TextBoxPage.BTN_SUBMIT)
+        self.remove_advertising_in_footer()\
+            .scroll_js(TextBoxPage.BTN_SUBMIT)\
+            .click_on(TextBoxPage.BTN_SUBMIT)
 
     def get_output_user_data(self) -> tuple:
         split_full_name = self.get_text(TextBoxPage.OUTPUT_FULL_NAME).split(sep=':')
