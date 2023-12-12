@@ -15,7 +15,7 @@ class RadioButtonPage(MethodsToInteractWithPages):
         super().__init__(driver)
         self.menu_bar = MenuBar(self.driver)
 
-    def click_on_radio_buttons_and_get_output_text(self) -> tuple:
+    def click_on_radio_buttons_and_get_output_text(self) -> tuple[list, list]:
         """цей метод повертає списки: 1й містить усі назви клікнутих радіобатонів,
         2й список - назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """
         list_of_clicked_radiobutt = []

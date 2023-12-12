@@ -39,7 +39,7 @@ class PracticeFormPage(MethodsToInteractWithPages):
                         subject: UserModel,
                         current_address: UserModel,
                         state: UserModel,
-                        city: UserModel) -> tuple:
+                        city: UserModel) -> tuple[str, str]:
         self.remove_advertising_in_footer() \
             .set_data(PracticeFormPage.TXT_FIRST_NAME, first_name) \
             .set_data(PracticeFormPage.TXT_LAST_NAME, last_name) \

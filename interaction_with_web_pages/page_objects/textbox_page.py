@@ -35,7 +35,7 @@ class TextBoxPage(MethodsToInteractWithPages):
             .scroll_js(TextBoxPage.BTN_SUBMIT)\
             .click_on(TextBoxPage.BTN_SUBMIT)
 
-    def get_output_user_data(self) -> tuple:
+    def get_output_user_data(self) -> tuple[str, str, str, str]:
         split_full_name = self.get_text(TextBoxPage.OUTPUT_FULL_NAME).split(sep=':')
         split_email = self.get_text(TextBoxPage.OUTPUT_EMAIL).split(sep=':')
         split_curr_address = self.get_text(TextBoxPage.OUTPUT_CURRENT_ADDRESS).split(sep=':')

@@ -70,7 +70,7 @@ class WebTablesPage(MethodsToInteractWithPages):
         """цей метод повертає текст, який підтверджує, що рядок з заданим емейлом не знайдено """
         return self.get_text(WebTablesPage.THE_CHECKING_TEXT)
 
-    def quantity_of_rows(self) -> tuple:
+    def quantity_of_rows(self) -> tuple[list, list]:
         """цей метод: 1)змінює к-сть рядків таблиці що відображаються на сторінці;
         2) підраховує к-сть рядків, що фактично відображено в таблиці"""
         wait_for_btn_the_quantity_of_rows = self.wait_for_visibility_of_el(WebTablesPage.BTN_THE_QUANTITY_OF_ROWS)
