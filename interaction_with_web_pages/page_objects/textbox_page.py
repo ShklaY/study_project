@@ -1,9 +1,10 @@
+from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from interaction_with_web_pages.user_model import UserModel
 
 
-class TextBoxPage(MenuBar):
+class TextBoxPage(MethodsToInteractWithPages):
     TXT_FULL_NAME = (By.CSS_SELECTOR, 'input[id="userName"]')
     TXT_EMAIL = (By.CSS_SELECTOR, 'input[id="userEmail"]')
     TXT_CURRENT_ADDRESS = (By.CSS_SELECTOR, 'textarea[id="currentAddress"]')
@@ -14,6 +15,10 @@ class TextBoxPage(MenuBar):
     OUTPUT_EMAIL = (By.CSS_SELECTOR, 'p[id="email"]')
     OUTPUT_CURRENT_ADDRESS = (By.CSS_SELECTOR, 'p[id="currentAddress"]')
     OUTPUT_PERMANENT_ADDRESS = (By.CSS_SELECTOR, 'p[id="permanentAddress"]')
+
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.menu_bar = MenuBar(self.driver)
 
     def fill_text_boxes(self,
                         full_name: UserModel,

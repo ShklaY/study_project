@@ -4,7 +4,7 @@ from assertpy import assert_that
 class TestTextBoxPage:
     def test_send_text_boxes(self, all_pages, input_user_data):
         all_pages.base_pg.click_on_btn_elements()
-        all_pages.elements_pg.click_on_btn_text_box()
+        all_pages.elements_pg.menu_bar.click_on_btn_text_box()
         all_pages.textbox_pg.fill_text_boxes(
             full_name=input_user_data.full_name,
             email=input_user_data.email,
@@ -22,7 +22,7 @@ class TestTextBoxPage:
 class TestCheckBoxPage:
     def test_click_on_check_boxes(self, all_pages):
         all_pages.base_pg.click_on_btn_elements()
-        all_pages.elements_pg.click_on_btn_check_box()
+        all_pages.elements_pg.menu_bar.click_on_btn_check_box()
         all_pages.checkbox_pg.click_on_btn_expand_all()
         all_pages.checkbox_pg.click_on_random_checkboxes()
         titles_of_checked_checkboxes = all_pages.checkbox_pg.get_titles_of_checked_checkboxes()
@@ -34,7 +34,7 @@ class TestCheckBoxPage:
 class TestRadioButtonPage:
     def test_click_on_radio_buttons(self, all_pages):
         all_pages.base_pg.click_on_btn_elements()
-        all_pages.elements_pg.click_on_btn_radio_button()
+        all_pages.elements_pg.menu_bar.click_on_btn_radio_button()
         """асьорт списків, де 1й список містить усі назви клікнутих радіобатонів , 
         а 2й список - назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """
         list_of_clicked_radiobutt, list_of_output_radiobutt = all_pages.radiobutton_pg.click_on_radio_buttons_and_get_output_text()
@@ -44,7 +44,7 @@ class TestRadioButtonPage:
 class TestWebTablesPage:
     def test_add_new_record(self, all_pages, input_user_data):
         all_pages.base_pg.click_on_btn_elements()
-        all_pages.elements_pg.click_on_btn_web_tables()
+        all_pages.elements_pg.menu_bar.click_on_btn_web_tables()
         """додавання нового запису в таблицю"""
         all_pages.web_tables_pg.click_on_btn_add()
         new_record = all_pages.web_tables_pg.fill_all_fields(
@@ -81,7 +81,7 @@ class TestWebTablesPage:
     def test_quantity_of_rows(self, all_pages):
         """перевірка чи обрані опції к-сті рядків відповідають фактичній к-сті рядків відображених на сторінці"""
         all_pages.base_pg.click_on_btn_elements()
-        all_pages.elements_pg.click_on_btn_web_tables()
+        all_pages.elements_pg.menu_bar.click_on_btn_web_tables()
         list_of_clicked_options, list_of_counted_rows = all_pages.web_tables_pg.quantity_of_rows()
         assert_that(list_of_clicked_options).is_equal_to(list_of_counted_rows).described_as("quantity of_clicked_options != quantity of_counted_rows")
 
@@ -89,7 +89,7 @@ class TestWebTablesPage:
 class TestPracticeFormPage:
     def test_registration_new_student(self, all_pages, input_user_data):
         all_pages.base_pg.click_on_btn_forms()
-        all_pages.forms_pg.click_on_btn_practice_form()
+        all_pages.forms_pg.menu_bar.click_on_btn_practice_form()
 
         """заповнення форми реєстрації студента"""
         inp_gender, inp_hobby = all_pages.practice_form_pg.set_new_student(

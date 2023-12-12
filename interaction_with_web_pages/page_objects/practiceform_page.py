@@ -1,12 +1,14 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
+
+from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
 from interaction_with_web_pages.user_model import UserModel
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 import random
 from typing import Self
 
 
-class PracticeFormPage(MenuBar):
+class PracticeFormPage(MethodsToInteractWithPages):
     TXT_FIRST_NAME = (By.CSS_SELECTOR, '[id="firstName"]')
     TXT_LAST_NAME = (By.CSS_SELECTOR, '[id="lastName"]')
     TXT_EMAIL = (By.CSS_SELECTOR, '[id="userEmail"]')
@@ -24,6 +26,10 @@ class PracticeFormPage(MenuBar):
     BTN_SUBMIT = (By.CSS_SELECTOR, '[id="submit"]')
 
     RESULT_TABLE = (By.XPATH, '//tr/td[2]')
+
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.menu_bar = MenuBar(self.driver)
 
     def set_new_student(self,
                         first_name: UserModel,

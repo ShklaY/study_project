@@ -1,10 +1,11 @@
+from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
 from interaction_with_web_pages.user_model import UserModel
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 
-class WebTablesPage(MenuBar):
+class WebTablesPage(MethodsToInteractWithPages):
     BTN_ADD = (By.CSS_SELECTOR, 'button[id="addNewRecordButton"]')
     TXT_FIRST_NAME = (By.CSS_SELECTOR, 'input[id="firstName"]')
     TXT_LAST_NAME = (By.CSS_SELECTOR, 'input[id="lastName"]')
@@ -21,6 +22,10 @@ class WebTablesPage(MenuBar):
     THE_CHECKING_TEXT = (By.CSS_SELECTOR, '[class="rt-noData"]')
 
     BTN_THE_QUANTITY_OF_ROWS = (By.CSS_SELECTOR, 'select[aria-label="rows per page"]')
+
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.menu_bar = MenuBar(self.driver)
 
     def click_on_btn_add(self) -> None:
         """цей метод відкриває Registration form"""

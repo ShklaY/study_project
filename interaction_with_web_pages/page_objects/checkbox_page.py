@@ -1,14 +1,19 @@
+from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 import random
 
 
-class CheckBoxPage(MenuBar):
+class CheckBoxPage(MethodsToInteractWithPages):
     BTN_EXPAND_ALL = (By.CSS_SELECTOR, 'button[title="Expand all"]')
     TITLES_OF_CHECKBOXES = (By.CSS_SELECTOR, '[class="rct-title"]')
     ICON_CHECK = (By.CSS_SELECTOR, '[class="rct-icon rct-icon-check"]')
     ancestor_for_checked_checkboxes = (By.XPATH, './/ancestor::span[@class="rct-text"]')
     RESULT_ROW_OF_SELECTED_CHECKBOXES = (By.XPATH, '//div/span[@class="text-success"]')
+
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.menu_bar = MenuBar(self.driver)
 
     def click_on_btn_expand_all(self) -> None:
         self.click_on(CheckBoxPage.BTN_EXPAND_ALL)
