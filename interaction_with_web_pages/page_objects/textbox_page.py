@@ -15,7 +15,11 @@ class TextBoxPage(MenuBar):
     OUTPUT_CURRENT_ADDRESS = (By.CSS_SELECTOR, 'p[id="currentAddress"]')
     OUTPUT_PERMANENT_ADDRESS = (By.CSS_SELECTOR, 'p[id="permanentAddress"]')
 
-    def fill_text_boxes(self, full_name: UserModel, email: UserModel, current_address: UserModel, permanent_address: UserModel) -> None:
+    def fill_text_boxes(self,
+                        full_name: UserModel,
+                        email: UserModel,
+                        current_address: UserModel,
+                        permanent_address: UserModel) -> None:
         self.set_data(TextBoxPage.TXT_FULL_NAME, full_name)\
             .set_data(TextBoxPage.TXT_EMAIL, email)\
             .set_data(TextBoxPage.TXT_CURRENT_ADDRESS, current_address)\
