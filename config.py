@@ -1,5 +1,5 @@
-import os
+from file_system import FileSystem
 
-CURRENT_FILE_PATH = os.path.abspath(__file__)
-PROJECT_ROOT = os.path.dirname(CURRENT_FILE_PATH)
-DATABASE_PATH = os.path.join(PROJECT_ROOT, 'study_db.sqlite3')
+DATABASE_PATH = FileSystem.get_absolute_path_for_file('study_db.sqlite3')
+
+WEB_PAGES_LOGFILE_PATH = FileSystem.get_absolute_path_for_file(r'logs\web_pages_logfile.log')
