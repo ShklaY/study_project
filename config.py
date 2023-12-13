@@ -1,4 +1,4 @@
-from file_system import FileSystem
+from helpers.file_system import FileSystem
 
 DATABASE_PATH = FileSystem.get_absolute_path_for_file('study_db.sqlite3')
 
