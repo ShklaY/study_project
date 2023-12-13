@@ -2,11 +2,8 @@ import pytest
 from selenium import webdriver
 from faker import Faker
 import random
-from interaction_with_db.queries_for_tcm_testcase_table import QueriesForTcmTestcaseTable
 from interaction_with_web_pages.page_objects.all_pages import AllPages
 from interaction_with_web_pages.user_model import UserModel
-import sqlite3
-from config import DATABASE_PATH
 
 
 @pytest.fixture(scope="class")
@@ -74,9 +71,3 @@ def input_user_data():
     return user_data
 
 
-@pytest.fixture(scope="class")
-def queries_for_tcm_testcase_table():
-    connect_db = sqlite3.connect(DATABASE_PATH)
-    queries = QueriesForTcmTestcaseTable(connect_db)
-    yield queries
-    connect_db.close()
