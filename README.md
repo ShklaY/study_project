@@ -1,1 +1,1 @@
-# this is a study project :sparkles: #
+# this is a study project :sparkles: :sparkles: :sparkles: #
