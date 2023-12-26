@@ -41,11 +41,9 @@ class TestRadioButtonPage:
         all_pages.base_pg.click_on_btn_elements()
         all_pages.elements_pg.menu_bar.click_on_btn_radio_button()
 
-        """list_of_clicked_radiobutt містить усі назви клікнутих радіобатонів , 
-        list_of_output_radiobutt містить назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """
-        list_of_clicked_radiobutt, list_of_output_radiobutt = all_pages.radiobutton_pg.click_on_radio_buttons_and_get_output_text()
+        results = all_pages.radiobutton_pg.click_on_radio_buttons_and_get_output_text()
 
-        assert_that(list_of_clicked_radiobutt).is_equal_to(list_of_output_radiobutt).described_as("clicked radio buttons =! result")
+        assert_that(results['expected_res']).is_equal_to(results['actual_res']).described_as("clicked radio buttons =! output_radio_buttons")
 
 
 class TestWebTablesPage:
@@ -92,13 +90,12 @@ class TestWebTablesPage:
         assert_that(checking_text).is_equal_to('No rows found').described_as('new_record doesnt deleted')
 
     def test_quantity_of_rows(self, all_pages):
-        """перевірка чи обрані опції к-сті рядків відповідають фактичній к-сті рядків відображених на сторінці"""
         all_pages.base_pg.click_on_btn_elements()
         all_pages.elements_pg.menu_bar.click_on_btn_web_tables()
 
-        list_of_clicked_options, list_of_counted_rows = all_pages.web_tables_pg.quantity_of_rows()
+        results = all_pages.web_tables_pg.quantity_of_rows()
 
-        assert_that(list_of_clicked_options).is_equal_to(list_of_counted_rows).described_as("quantity of_clicked_options != quantity of_counted_rows")
+        assert_that(results['expected_quantity']).is_equal_to(results['actual_quantity']).described_as("expected_quantity_of_rows != actual_quantity_of_rows")
 
 
 class TestPracticeFormPage:
