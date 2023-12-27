@@ -27,7 +27,7 @@ class CheckBoxPage(MethodsToInteractWithPages):
             random_checkbox = list_of_all_checkboxes[random_number]
             random_checkbox.click()
 
-    def get_titles_of_checked_checkboxes(self) -> list:
+    def get_titles_of_checked_checkboxes(self) -> list[str]:
         checked_checkboxes = self.wait_for_visibility_of_all_elements(CheckBoxPage.ICON_CHECK)
 
         titles_of_checked_checkboxes = []
@@ -36,7 +36,7 @@ class CheckBoxPage(MethodsToInteractWithPages):
             titles_of_checked_checkboxes.append(find_ancestor.text.lower().replace(".doc", '').replace(" ", ''))
         return titles_of_checked_checkboxes
 
-    def get_output_result(self) -> list:
+    def get_output_result(self) -> list[str]:
         """повертає назви чекбоксів, що виводяться в рядку 'You have selected' """
         result_row_of_selected_checkboxes = self.wait_for_visibility_of_all_elements(CheckBoxPage.RESULT_ROW_OF_SELECTED_CHECKBOXES)
         list_of_selected_checkboxes = [selected_checkbox.text.lower().replace(" ", '')

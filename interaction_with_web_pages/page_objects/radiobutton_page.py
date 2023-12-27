@@ -3,6 +3,7 @@ from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToI
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from helpers.logger import log
+from typing import Dict, List
 
 
 class RadioButtonPage(MethodsToInteractWithPages):
@@ -15,11 +16,13 @@ class RadioButtonPage(MethodsToInteractWithPages):
         super().__init__(driver)
         self.menu_bar = MenuBar(self.driver)
 
-    def click_on_radio_buttons_and_get_output_text(self) -> tuple[list, list]:
-        """цей метод повертає списки: 1й містить усі назви клікнутих радіобатонів,
-        2й список - назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """
-        list_of_clicked_radiobutt = []
-        list_of_output_radiobutt = []
+    def click_on_radio_buttons_and_get_output_text(self) -> Dict[str, List[str]]:
+        """ключ 'expected_res' містить усі назви клікнутих радіобатонів,
+        ключ 'actual_res' містить назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """
+        results = {
+            'expected_res': [],
+            'actual_res': []
+        }
         len_list_of_radio_buttons = len(self.wait_for_visibility_of_all_elements(RadioButtonPage.RADIO_BUTTONS))
         for i in range(len_list_of_radio_buttons):
             try:
@@ -27,12 +30,12 @@ class RadioButtonPage(MethodsToInteractWithPages):
                 radio_button = list_of_radio_buttons[i]
                 find_a_preceding_sibling = radio_button.find_element(*RadioButtonPage.PRECEDING_SIBLING_FOR_RADIO_BTNS)
                 if find_a_preceding_sibling.is_enabled():
-                    list_of_clicked_radiobutt.append(radio_button.text)
+                    results['expected_res'].append(radio_button.text)
                     radio_button.click()
                     log.info(f'Clicked on "{radio_button.text}" radio button')
-                    list_of_output_radiobutt.append(self.get_text(RadioButtonPage.OUTPUT_TEXT))
+                    results['actual_res'].append(self.get_text(RadioButtonPage.OUTPUT_TEXT))
             except StaleElementReferenceException as e:
                 log.warning(f'StaleElementReferenceException. {e}', exc_info=True)
-        return list_of_clicked_radiobutt, list_of_output_radiobutt
+        return results
 
 

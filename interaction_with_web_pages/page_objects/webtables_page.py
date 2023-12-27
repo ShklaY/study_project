@@ -3,6 +3,7 @@ from interaction_with_web_pages.user_model import UserModel
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+from typing import Dict, List
 
 
 class WebTablesPage(MethodsToInteractWithPages):
@@ -70,22 +71,24 @@ class WebTablesPage(MethodsToInteractWithPages):
         """цей метод повертає текст, який підтверджує, що рядок з заданим емейлом не знайдено """
         return self.get_text(WebTablesPage.THE_CHECKING_TEXT)
 
-    def quantity_of_rows(self) -> tuple[list, list]:
+    def quantity_of_rows(self) -> Dict[str, List[str]]:
         """цей метод: 1)змінює к-сть рядків таблиці що відображаються на сторінці;
         2) підраховує к-сть рядків, що фактично відображено в таблиці"""
         wait_for_btn_the_quantity_of_rows = self.wait_for_visibility_of_el(WebTablesPage.BTN_THE_QUANTITY_OF_ROWS)
         select = Select(wait_for_btn_the_quantity_of_rows)
         list_of_options = select.options
-        list_of_clicked_options = []
-        list_of_counted_rows = []
+        results = {
+            'expected_quantity': [],
+            'actual_quantity': []
+        }
 
         for option in list_of_options:
             self.scroll_js(WebTablesPage.BTN_THE_QUANTITY_OF_ROWS)
             option.click()
-            list_of_clicked_options.append(option.text.replace(' rows', ''))
+            results['expected_quantity'].append(option.text.replace(' rows', ''))
             actual_quantity_rows = self.wait_for_visibility_of_all_elements(WebTablesPage.ROWS)
-            list_of_counted_rows.append(str(len(actual_quantity_rows)))
-        return list_of_clicked_options, list_of_counted_rows
+            results['actual_quantity'].append(str(len(actual_quantity_rows)))
+        return results
 
 
 

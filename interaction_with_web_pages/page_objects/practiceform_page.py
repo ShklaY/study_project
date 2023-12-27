@@ -65,7 +65,7 @@ class PracticeFormPage(MethodsToInteractWithPages):
             .wait_for_visibility_of_el(locator).send_keys(Keys.ENTER)
         return self
 
-    def get_data_of_registered_student(self) -> list:
+    def get_data_of_registered_student(self) -> list[str]:
         """цей метод повертає дані з підтверджувальної таблиці"""
         table = self.wait_for_visibility_of_all_elements(PracticeFormPage.RESULT_TABLE)
         list_with_data_of_registered_student = [row.text for row in table]
