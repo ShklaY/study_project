@@ -1,14 +1,21 @@
+import time
 import pytest
 from selenium import webdriver
 from faker import Faker
 import random
+from helpers.file_system import FileSystem
 from interaction_with_web_pages.page_objects.all_pages import AllPages
 from interaction_with_web_pages.user_model import UserModel
 
 
 @pytest.fixture(scope="class")
-def all_pages():
+def driver():
     driver = webdriver.Chrome()
+    yield driver
+
+
+@pytest.fixture(scope="class")
+def all_pages(driver):
     driver.maximize_window()
     driver.get('https://demoqa.com/')
     all_pages = AllPages(driver)
@@ -71,3 +78,27 @@ def input_user_data():
     return user_data
 
 
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item):
+    pytest_html = item.config.pluginmanager.getplugin('html')
+    outcome = yield
+    report = outcome.get_result()
+    extra = getattr(report, "extra", [])
+    driver = item.funcargs.get('driver', None)  # Отримання фікстури 'driver' з контексту
+
+    if report.when == "call":
+        extra.append(pytest_html.extras.url(""))
+        xfail = hasattr(report, "wasxfail")
+        if (report.skipped and xfail) or (report.failed and not xfail):
+            file_name = str(int(round(time.time() * 1000))) + ".png"
+            destinationFile = FileSystem.get_absolute_path_for_file('repots', file_name)
+            driver.save_screenshot(destinationFile)
+            if file_name:
+                html_content = '<div><img src="%s" alt="screenshot" style="width:300px;height=200px"' \
+                               'onclick="window.open(this.src)" align="right"/></div>' % file_name
+                extra.append(pytest_html.extras.html(html_content))
+        report.extras = extra
+
+
+def pytest_html_report_title(report):
+    report.title = "Test Web pages Report"
