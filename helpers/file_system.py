@@ -7,6 +7,10 @@ class FileSystem:
         return Path(__file__).parent.parent
 
     @staticmethod
-    def get_absolute_path_for_file(*path_parts: str) -> str:
-        return FileSystem.get_project_root().joinpath(*path_parts).__str__()
+    def make_dir(*path: str) -> Path:
+        # create directory if not exists
+        directory_path = FileSystem.get_project_root().joinpath(*path)
+        if not directory_path.is_dir():
+            directory_path.mkdir()
+        return directory_path
 

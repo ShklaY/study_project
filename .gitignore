@@ -160,4 +160,5 @@ cython_debug/
 .idea/
 /draft.py
 /draft2.py
-/logs/web_pages_logfile.log
+.test_logs/
+.reports/
