@@ -7,11 +7,13 @@ import random
 from config import DIR_REPORTS_PATH
 from interaction_with_web_pages.page_objects.all_pages import AllPages
 from interaction_with_web_pages.user_model import UserModel
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
 
 
 @pytest.fixture(scope="function")
 def all_pages(request, record_property):
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     driver.maximize_window()
     driver.get('https://demoqa.com/')
     all_pages = AllPages(driver)
