@@ -1,18 +1,22 @@
+import json
+from uuid import uuid4
 import pytest
 from selenium import webdriver
 from faker import Faker
 import random
+from config import DIR_REPORTS_PATH
 from interaction_with_web_pages.page_objects.all_pages import AllPages
 from interaction_with_web_pages.user_model import UserModel
 
 
-@pytest.fixture(scope="class")
-def all_pages():
+@pytest.fixture(scope="function")
+def all_pages(request, record_property):
     driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get('https://demoqa.com/')
     all_pages = AllPages(driver)
     yield all_pages
+    save_failure_artifacts(driver, request, record_property)
     driver.quit()
 
 
@@ -71,3 +75,29 @@ def input_user_data():
     return user_data
 
 
+def save_failure_artifacts(driver, request, record_property):
+    """Saves screenshot and browser logs for failed tests"""
+    if request.node.rep_setup.failed or request.node.rep_call.failed:
+        try:
+            failure_id = uuid4()
+
+            # Save screenshot
+            screenshot_path = str(DIR_REPORTS_PATH / f'{failure_id}_screenshot.png')
+            driver.save_screenshot(screenshot_path)
+            record_property("testrail_attachment", screenshot_path)
+
+            # Save browser logs
+            browser_logs_path = DIR_REPORTS_PATH / f'{failure_id}_browser_logs.json'
+            with open(browser_logs_path, "x") as file:
+                file.write(json.dumps(driver.get_log("browser"), indent=4))
+            record_property("testrail_attachment", browser_logs_path)
+
+        except Exception as ex:
+            print(ex)
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    rep = outcome.get_result()
+    setattr(item, "rep_" + rep.when, rep)
