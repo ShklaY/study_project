@@ -1,11 +1,7 @@
-name: "Run UI tests"
+name: Run UI tests
 
-on:
-  pull_request:
-    branches:
-    - test-rail_branch_2
-    
-  workflow_dispatch:
+on: 
+  workflow_dispatch
 
 
 jobs:
