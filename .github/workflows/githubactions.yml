@@ -1,7 +1,8 @@
 name: Run UI tests
 
-on: 
-  workflow_dispatch
+on:
+  schedule:
+  - cron: "0 2 * * 1-5"
 
 
 jobs:
@@ -24,7 +25,7 @@ jobs:
 
       - name: Test with pytest + create junit-report
         id: tests
-        run: export PYTHONPATH=$(pwd) && pytest --junitxml "reports/junit-report.xml" "./tests"
+        run: export PYTHONPATH=$(pwd) && pytest tests\test_web_pages.py::TestTextBoxPage --junitxml "reports/junit-report.xml" "./tests"
 
       - name: TestRail CLI upload results
         if: always()
