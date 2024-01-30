@@ -13,9 +13,14 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 
 @pytest.fixture(scope="function")
 def all_pages(request, record_property):
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    driver.maximize_window()
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+    driver.set_window_size(1920, 1080)
     driver.get('https://demoqa.com/')
+    driver.maximize_window()
     all_pages = AllPages(driver)
     yield all_pages
     save_failure_artifacts(driver, request, record_property)
