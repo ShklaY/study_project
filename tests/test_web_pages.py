@@ -19,7 +19,7 @@ class TestTextBoxPage:
         output_full_name, output_email, output_current_address, output_permanent_address = all_pages.textbox_pg.get_output_user_data()
 
         record_property('testrail_result_comment', '4. Check the output data == input data')
-        assert_that(output_full_name).is_equal_to(input_user_data.full_name).described_as("input name != output")
+        assert_that("output_full_name").is_equal_to(input_user_data.full_name).described_as("input name != output")
         assert_that(output_email).is_equal_to(input_user_data.email).described_as("email != output")
         assert_that(output_current_address).is_equal_to(input_user_data.current_address).described_as("curr_address != output")
         assert_that(output_permanent_address).is_equal_to(input_user_data.permanent_address).described_as("perman_address != output")
