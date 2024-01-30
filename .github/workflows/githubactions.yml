@@ -26,18 +26,7 @@ jobs:
         id: tests
         run: export PYTHONPATH=$(pwd) && pytest --junitxml "reports/junit-report.xml" "./tests"
       
-      - name: TestRail CLI upload results
-        if: always()
-        run: |
-          pip install trcli
-          trcli -y \
-            -h https://jesehik354354.testrail.io \
-            --project "22_01_24" \
-            -u ${{ secrets.USERNAME_TESTRAIL }} \
-            -p ${{ secrets.PASSWORD_TESTRAIL }} \
-            parse_junit \
-            --title "Pytest Automated Test Run" \
-            -f "reports/junit-report.xml"
+
 
 
          
