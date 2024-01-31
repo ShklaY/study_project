@@ -128,4 +128,3 @@ class TestPracticeFormPage:
         assert_that(input_user_data.current_address).is_equal_to(res_address).described_as('address error')
         assert_that(f'{input_user_data.state} {input_user_data.city}').is_equal_to(res_state_and_city).described_as('state/city error')
 
-
