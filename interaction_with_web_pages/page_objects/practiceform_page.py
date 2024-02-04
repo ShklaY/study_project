@@ -1,6 +1,5 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-
 from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
 from interaction_with_web_pages.user_model import UserModel
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar

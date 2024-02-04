@@ -3,7 +3,7 @@ from interaction_with_web_pages.user_model import UserModel
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-from typing import Dict, List
+from interaction_with_web_pages.results_helper import ResultsHelper
 
 
 class WebTablesPage(MethodsToInteractWithPages):
@@ -71,23 +71,23 @@ class WebTablesPage(MethodsToInteractWithPages):
         """цей метод повертає текст, який підтверджує, що рядок з заданим емейлом не знайдено """
         return self.get_text(WebTablesPage.THE_CHECKING_TEXT)
 
-    def quantity_of_rows(self) -> Dict[str, List[str]]:
+    def quantity_of_rows(self) -> ResultsHelper:
         """цей метод: 1)змінює к-сть рядків таблиці що відображаються на сторінці;
         2) підраховує к-сть рядків, що фактично відображено в таблиці"""
         wait_for_btn_the_quantity_of_rows = self.wait_for_visibility_of_el(WebTablesPage.BTN_THE_QUANTITY_OF_ROWS)
         select = Select(wait_for_btn_the_quantity_of_rows)
         list_of_options = select.options
-        results = {
-            'expected_quantity': [],
-            'actual_quantity': []
+        results: ResultsHelper = {
+            'expected': [],
+            'actual': []
         }
 
         for option in list_of_options:
             self.scroll_js(WebTablesPage.BTN_THE_QUANTITY_OF_ROWS)
             option.click()
-            results['expected_quantity'].append(option.text.replace(' rows', ''))
+            results['expected'].append(option.text.replace(' rows', ''))
             actual_quantity_rows = self.wait_for_visibility_of_all_elements(WebTablesPage.ROWS)
-            results['actual_quantity'].append(str(len(actual_quantity_rows)))
+            results['actual'].append(str(len(actual_quantity_rows)))
         return results
 
 

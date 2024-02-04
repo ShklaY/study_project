@@ -56,7 +56,7 @@ class TestRadioButtonPage:
         results = all_pages.radiobutton_pg.click_on_radio_buttons_and_get_output_text()
 
         record_property('testrail_result_comment', '4. Check the names of clicked radio buttons == names of radio buttons on the output')
-        assert_that(results['expected_res']).is_equal_to(results['actual_res']).described_as("clicked radio buttons =! output_radio_buttons")
+        assert_that(results['expected']).is_equal_to(results['actual']).described_as("clicked radio buttons =! output_radio_buttons")
 
 
 class TestWebTablesPage:
@@ -129,7 +129,7 @@ class TestWebTablesPage:
         results = all_pages.web_tables_pg.quantity_of_rows()
 
         record_property('testrail_result_comment', '4. Check the number of rows in the table for each option sequentially')
-        assert_that(results['expected_quantity']).is_equal_to(results['actual_quantity']).described_as("expected_quantity_of_rows != actual_quantity_of_rows")
+        assert_that(results['expected']).is_equal_to(results['actual']).described_as("expected_quantity_of_rows != actual_quantity_of_rows")
 
 
 class TestPracticeFormPage:
