@@ -1,8 +1,7 @@
 name: Run UI tests
 
 on:
-  schedule:
-    - cron: "0 4 * * *"
+  workflow_dispatch
 
 jobs:
   run_tests:
@@ -31,12 +30,12 @@ jobs:
         run: |
           pip install trcli
           trcli -y \
-            -h https://jesehik354354.testrail.io \
-            --project "22_01_24" \
+            -h https://licowob.testrail.io \
+            --project "UI tests" \
             -u ${{ secrets.USERNAME_TESTRAIL }} \
             -p ${{ secrets.PASSWORD_TESTRAIL }} \
             parse_junit \
-            --title "Pytest Automated Test Run" \
+            --title "Automated Test Run" \
             -f "reports/junit-report.xml"
 
 
