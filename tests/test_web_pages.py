@@ -1,6 +1,8 @@
+import pytest
 from assertpy import assert_that
 
 
+@pytest.mark.elements_section
 class TestTextBoxPage:
     def test_send_text_boxes(self, all_pages, input_user_data, record_property):
         record_property('testrail_result_comment', '1. Click on button Elements')
@@ -25,6 +27,7 @@ class TestTextBoxPage:
         assert_that(output_permanent_address).is_equal_to(input_user_data.permanent_address).described_as("perman_address != output")
 
 
+@pytest.mark.elements_section
 class TestCheckBoxPage:
     def test_click_on_check_boxes(self, all_pages, record_property):
         record_property('testrail_result_comment', '1. Click on button Elements')
@@ -45,6 +48,7 @@ class TestCheckBoxPage:
         assert_that(titles_of_checked_checkboxes).is_equal_to(output_result).described_as("clicked checkboxes != result")
 
 
+@pytest.mark.elements_section
 class TestRadioButtonPage:
     def test_click_on_radio_buttons(self, all_pages, record_property):
         record_property('testrail_result_comment', '1. Click on button Elements')
@@ -59,6 +63,7 @@ class TestRadioButtonPage:
         assert_that(results['expected']).is_equal_to(results['actual']).described_as("clicked radio buttons =! output_radio_buttons")
 
 
+@pytest.mark.elements_section
 class TestWebTablesPage:
     @staticmethod
     def test_add_new_record(all_pages, input_user_data, record_property):
@@ -132,6 +137,7 @@ class TestWebTablesPage:
         assert_that(results['expected']).is_equal_to(results['actual']).described_as("expected_quantity_of_rows != actual_quantity_of_rows")
 
 
+@pytest.mark.forms_section
 class TestPracticeFormPage:
     def test_registration_new_student(self, all_pages, input_user_data, record_property):
         record_property('testrail_result_comment', '1. Click on button Forms')
