@@ -4,7 +4,7 @@ import pytest
 from selenium import webdriver
 from faker import Faker
 import random
-from config import DIR_REPORTS_PATH
+from config import DIR_REPORTS_PATH, WEB_PAGES_LOGFILE_PATH
 from interaction_with_web_pages.page_objects.all_pages import AllPages
 from interaction_with_web_pages.user_model import UserModel
 from webdriver_manager.chrome import ChromeDriverManager
@@ -98,6 +98,9 @@ def save_failure_artifacts(driver, request, record_property):
             with open(browser_logs_path, "x") as file:
                 file.write(json.dumps(driver.get_log("browser"), indent=4))
             record_property("testrail_attachment", browser_logs_path)
+
+            # Save web_pages_logfile
+            record_property("testrail_attachment", WEB_PAGES_LOGFILE_PATH)
 
         except Exception as ex:
             print(ex)

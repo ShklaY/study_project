@@ -1,6 +1,8 @@
+from selenium.common import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from helpers.logger import log
 from interaction_with_web_pages.user_model import UserModel
 from typing import Self
 
@@ -12,7 +14,13 @@ class MethodsToInteractWithPages:
 
     def wait_for_visibility_of_el(self, locator: tuple) -> WebElement:
         """Цей метод очікує, поки е-нт стане видимим на стрінці"""
-        return self.wait.until(EC.visibility_of_element_located(locator))
+        try:
+            wait_until = self.wait.until(EC.visibility_of_element_located(locator))
+        except TimeoutException as e:
+            log.error(f'TimeoutException. {e}')
+            raise TimeoutException(f"Element '{locator[0]} {locator[1]}' not found.")
+        else:
+            return wait_until
 
     def click_on(self, locator: tuple) -> Self:
         self.wait_for_visibility_of_el(locator).click()
