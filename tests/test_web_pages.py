@@ -115,12 +115,12 @@ class TestWebTablesPage:
     def test_remove_new_record(self, all_pages, input_user_data, record_property):
         self.test_update_email(all_pages, input_user_data, record_property)
 
-        record_property('testrail_result_comment', '6. Click on the trash can icon')
+        record_property('testrail_result_comment', '9. Click on the trash can icon')
         all_pages.web_tables_pg.remove_new_record()
 
         checking_text = all_pages.web_tables_pg.get_the_checking_text()
 
-        record_property('testrail_result_comment', '7. Check the text "No rows found" has appeared')
+        record_property('testrail_result_comment', '10. Check the text "No rows found" has appeared')
         assert_that(checking_text).is_equal_to('No rows found').described_as('new_record doesnt deleted')
 
     def test_quantity_of_rows(self, all_pages, record_property):
