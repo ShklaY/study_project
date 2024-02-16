@@ -30,7 +30,8 @@ class WebTablesPage(MethodsToInteractWithPages):
 
     def click_on_btn_add(self) -> None:
         """цей метод відкриває Registration form"""
-        self.click_on(WebTablesPage.BTN_ADD)
+        self.remove_advertising_in_footer().\
+            click_on(WebTablesPage.BTN_ADD)
 
     def fill_all_fields(self, first_name: UserModel, last_name: UserModel, email: UserModel, age: UserModel, salary: UserModel, department: UserModel) -> str:
         """цей метод дозволяє заповнити поля в Registration form"""
@@ -64,8 +65,7 @@ class WebTablesPage(MethodsToInteractWithPages):
 
     def remove_new_record(self) -> None:
         """цей метод видаляє новий запис з таблиці"""
-        self.remove_advertising_in_footer()\
-            .click_on(WebTablesPage.BTN_DELETE)
+        self.click_on(WebTablesPage.BTN_DELETE)
 
     def get_the_checking_text(self) -> str:
         """цей метод повертає текст, який підтверджує, що рядок з заданим емейлом не знайдено """
