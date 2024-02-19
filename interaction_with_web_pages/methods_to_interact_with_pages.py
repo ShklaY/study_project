@@ -13,20 +13,14 @@ class MethodsToInteractWithPages:
         self.wait = WebDriverWait(driver, timeout=15)
 
     def wait_for_visibility_of_el(self, locator: tuple) -> WebElement:
-        """Цей метод виконує 2 спроби, поки е-нт стане видимим на стрінці"""
-        max_attempts = 2
-        for attempt in range(max_attempts):
-            try:
-                wait_until = self.wait.until(EC.visibility_of_element_located(locator))
-            except TimeoutException as e:
-                log.warning(f'TimeoutException on attempt {attempt + 1}. {e}')
-                if attempt == max_attempts - 1:
-                    raise TimeoutException(
-                        f"Element '{locator} ' not found after {max_attempts} attempts.")
-                else:
-                    log.info(f'Retrying to find element {locator}...')
-            else:
-                return wait_until
+        """Цей метод очікує, поки е-нт стане видимим на стрінці"""
+        try:
+            wait_until = self.wait.until(EC.visibility_of_element_located(locator))
+        except TimeoutException as e:
+            log.error(f'TimeoutException. {e}')
+            raise TimeoutException(f"Element '{locator}' not found.")
+        else:
+            return wait_until
 
     def click_on(self, locator: tuple) -> Self:
         self.wait_for_visibility_of_el(locator).click()
