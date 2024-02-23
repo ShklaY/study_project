@@ -32,7 +32,7 @@ pip install -r requirements.txt
 pytest --junitxml "reports/junit-report.xml" "./tests"
 ```
 
-3) TestRail CLI upload results (use your own data)
+3) Upload test results to TestRail (use your own data)
 ```
 pip install trcli
 
