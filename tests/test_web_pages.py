@@ -4,34 +4,61 @@ from assertpy import assert_that
 
 @pytest.mark.elements_section
 class TestTextBoxPage:
-    def test_send_text_boxes(self, all_pages, input_user_data, record_property):
-        record_property('testrail_result_comment', '1. Click on button Elements')
-        all_pages.base_pg.click_on_btn_elements()
-        record_property('testrail_result_comment', '2. Click on button Text Box')
-        all_pages.elements_pg.menu_bar.click_on_btn_text_box()
+    def test_correct_output_is_displayed_submitting_form_with_valid_values(self, all_pages, input_user_data, record_property):
+        record_property('testrail_result_comment', '1. Open text box page')
+        all_pages.textbox_pg.open_page()
 
         record_property('testrail_result_comment', '3. Fill text boxes by valid data')
         all_pages.textbox_pg.fill_text_boxes(
             full_name=input_user_data.full_name,
             email=input_user_data.email,
             current_address=input_user_data.current_address,
-            permanent_address=input_user_data.permanent_address)
-        all_pages.textbox_pg.click_on_btn_submit()
+            permanent_address=input_user_data.permanent_address
+        )
+        all_pages.textbox_pg.click_on_submit_btn()
 
-        output_full_name, output_email, output_current_address, output_permanent_address = all_pages.textbox_pg.get_output_user_data()
+        output_user_data = all_pages.textbox_pg.get_output_user_data()
 
         record_property('testrail_result_comment', '4. Check the output data == input data')
-        assert_that(output_full_name).is_equal_to(input_user_data.full_name).described_as("input name != output")
-        assert_that(output_email).is_equal_to(input_user_data.email).described_as("email != output")
-        assert_that(output_current_address).is_equal_to(input_user_data.current_address).described_as("curr_address != output")
-        assert_that(output_permanent_address).is_equal_to(input_user_data.permanent_address).described_as("perman_address != output")
+        assert_that(output_user_data.full_name).is_equal_to(input_user_data.full_name) \
+            .described_as("input name != output")
+        assert_that(output_user_data.email).is_equal_to(input_user_data.email) \
+             .described_as("email != output")
+        assert_that(output_user_data.current_address).is_equal_to(input_user_data.current_address) \
+             .described_as("curr_address != output")
+        assert_that(output_user_data.permanent_address).is_equal_to(input_user_data.permanent_address) \
+             .described_as("perman_address != output")
+
+    def test_validation_error_is_displayed_submitting_form_with_invalid_email(self, all_pages, input_user_data, record_property):
+        text_box_pg = all_pages.textbox_pg
+        record_property('testrail_result_comment', '1. Open text box page')
+        text_box_pg.open_page()
+
+        record_property('testrail_result_comment', '3. Fill text boxes by valid data')
+        text_box_pg.fill_text_boxes(
+            full_name=input_user_data.full_name,
+            email=input_user_data.invalid_email,
+            current_address=input_user_data.current_address,
+            permanent_address=input_user_data.permanent_address
+        )
+        text_box_pg.click_on_submit_btn()
+        text_box_pg.check_email_field_has_validation_error()
+
+    def test_validation_error_is_displayed_submitting_empty_form(self, all_pages, input_user_data, record_property):
+        text_box_pg = all_pages.textbox_pg
+        record_property('testrail_result_comment', '1. Open text box page')
+        text_box_pg.open_page()
+
+        text_box_pg.click_on_submit_btn()
+        text_box_pg.check_full_name_field_has_validation_error()
+        text_box_pg.check_email_field_has_validation_error()
 
 
 @pytest.mark.elements_section
 class TestCheckBoxPage:
     def test_click_on_check_boxes(self, all_pages, record_property):
         record_property('testrail_result_comment', '1. Click on button Elements')
-        all_pages.base_pg.click_on_btn_elements()
+        all_pages.start_pg.click_on_btn_elements()
         record_property('testrail_result_comment', '2. Click on button Check Box')
         all_pages.elements_pg.menu_bar.click_on_btn_check_box()
 
@@ -52,7 +79,7 @@ class TestCheckBoxPage:
 class TestRadioButtonPage:
     def test_click_on_radio_buttons(self, all_pages, record_property):
         record_property('testrail_result_comment', '1. Click on button Elements')
-        all_pages.base_pg.click_on_btn_elements()
+        all_pages.start_pg.click_on_btn_elements()
         record_property('testrail_result_comment', '2. Click on button Radio Button')
         all_pages.elements_pg.menu_bar.click_on_btn_radio_button()
 
@@ -68,7 +95,7 @@ class TestWebTablesPage:
     @staticmethod
     def test_add_new_record(all_pages, input_user_data, record_property):
         record_property('testrail_result_comment', '1. Click on button Elements')
-        all_pages.base_pg.click_on_btn_elements()
+        all_pages.start_pg.click_on_btn_elements()
         record_property('testrail_result_comment', '2. Click on button Web Tables')
         all_pages.elements_pg.menu_bar.click_on_btn_web_tables()
         record_property('testrail_result_comment', '3. Click on button Add')
@@ -81,7 +108,7 @@ class TestWebTablesPage:
             age=input_user_data.age,
             salary=input_user_data.salary,
             department=input_user_data.department)
-        all_pages.web_tables_pg.click_on_btn_submit()
+        all_pages.web_tables_pg.click_on_submit_btn()
         all_records = all_pages.web_tables_pg.get_text_from_rows()
 
         record_property('testrail_result_comment', '5. Check the new record was added to the table')
@@ -125,7 +152,7 @@ class TestWebTablesPage:
 
     def test_quantity_of_rows(self, all_pages, record_property):
         record_property('testrail_result_comment', '1. Click on button Elements')
-        all_pages.base_pg.click_on_btn_elements()
+        all_pages.start_pg.click_on_btn_elements()
 
         record_property('testrail_result_comment', '2. Click on button Web Tables')
         all_pages.elements_pg.menu_bar.click_on_btn_web_tables()
@@ -141,7 +168,7 @@ class TestWebTablesPage:
 class TestPracticeFormPage:
     def test_registration_new_student(self, all_pages, input_user_data, record_property):
         record_property('testrail_result_comment', '1. Click on button Forms')
-        all_pages.base_pg.click_on_btn_forms()
+        all_pages.start_pg.click_on_btn_forms()
         record_property('testrail_result_comment', '2. Click on button Practice Form')
         all_pages.forms_pg.menu_bar.click_on_btn_practice_form()
 

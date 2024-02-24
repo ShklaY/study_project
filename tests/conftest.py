@@ -66,6 +66,7 @@ def input_user_data():
     user_data = UserModel(
         full_name=fake.first_name(),
         email=fake.email(),
+        invalid_email=''.join(fake.email().split('@')),
         current_address=fake.address(),
         permanent_address=fake.address(),
         new_email=fake.email(),

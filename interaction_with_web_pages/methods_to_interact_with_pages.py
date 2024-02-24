@@ -2,6 +2,9 @@ from selenium.common import TimeoutException
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.webdriver import ChromiumDriver
+
+from config import BASE_URL
 from helpers.logger import log
 from interaction_with_web_pages.user_model import UserModel
 from typing import Self
@@ -9,8 +12,13 @@ from typing import Self
 
 class MethodsToInteractWithPages:
     def __init__(self, driver):
-        self.driver = driver
+        self.driver: ChromiumDriver = driver
         self.wait = WebDriverWait(driver, timeout=15)
+        self.base_url = BASE_URL
+        self.url = f'{self.base_url}/'
+
+    def open_page(self):
+        self.driver.get(self.url)
 
     def wait_for_visibility_of_el(self, locator: tuple) -> WebElement:
         """Цей метод очікує, поки е-нт стане видимим на стрінці"""

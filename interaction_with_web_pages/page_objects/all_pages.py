@@ -1,4 +1,4 @@
-from interaction_with_web_pages.page_objects.base_page import BasePage
+from interaction_with_web_pages.page_objects.start_page import StartPage
 from interaction_with_web_pages.page_objects.checkbox_page import CheckBoxPage
 from interaction_with_web_pages.page_objects.elements_page import ElementsPage
 from interaction_with_web_pages.page_objects.forms_page import FormsPage
@@ -10,7 +10,7 @@ from interaction_with_web_pages.page_objects.webtables_page import WebTablesPage
 
 class AllPages:
     def __init__(self, driver):
-        self.base_pg = BasePage(driver)
+        self.start_pg = StartPage(driver)
         self.elements_pg = ElementsPage(driver)
         self.textbox_pg = TextBoxPage(driver)
         self.checkbox_pg = CheckBoxPage(driver)

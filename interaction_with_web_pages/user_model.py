@@ -5,6 +5,7 @@ from dataclasses import dataclass
 class UserModel:
     full_name: str = None
     email: str = None
+    invalid_email: str = None
     current_address: str = None
     permanent_address: str = None
     new_email: str = None
