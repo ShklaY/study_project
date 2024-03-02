@@ -1,7 +1,7 @@
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
-from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
-from interaction_with_web_pages.user_model import UserModel
+from helpers.methods_to_interact_with_pages import MethodsToInteractWithPages
+from helpers.custom_types import UserModel
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 import random
 from typing import Self
@@ -29,6 +29,7 @@ class PracticeFormPage(MethodsToInteractWithPages):
     def __init__(self, driver):
         super().__init__(driver)
         self.menu_bar = MenuBar(self.driver)
+        self.url = f'{self.base_url}/automation-practice-form'
 
     def set_new_student(self,
                         first_name: UserModel,

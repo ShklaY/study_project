@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import TypedDict
 
 
 @dataclass
@@ -19,4 +20,8 @@ class UserModel:
     state: str = None
     city: str = None
 
+
+class ActualAndExpectedResult(TypedDict):
+    expected: list
+    actual: list
 

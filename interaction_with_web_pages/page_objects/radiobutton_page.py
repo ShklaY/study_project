@@ -1,9 +1,9 @@
 from selenium.common import StaleElementReferenceException
-from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
+from helpers.methods_to_interact_with_pages import MethodsToInteractWithPages
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 from helpers.logger import log
-from interaction_with_web_pages.results_helper import ResultsHelper
+from helpers.custom_types import ActualAndExpectedResult
 
 
 class RadioButtonPage(MethodsToInteractWithPages):
@@ -15,11 +15,12 @@ class RadioButtonPage(MethodsToInteractWithPages):
     def __init__(self, driver):
         super().__init__(driver)
         self.menu_bar = MenuBar(self.driver)
+        self.url = f'{self.base_url}/radio-button'
 
-    def click_on_radio_buttons_and_get_output_text(self) -> ResultsHelper:
+    def click_on_radio_buttons_and_get_output_text(self) -> ActualAndExpectedResult:
         """ключ 'expected_res' містить усі назви клікнутих радіобатонів,
         ключ 'actual_res' містить назви радіобатонів, що відображались на сторінці після тексту 'You have selected' """
-        results: ResultsHelper = {
+        results: ActualAndExpectedResult = {
             'expected': [],
             'actual': []
         }

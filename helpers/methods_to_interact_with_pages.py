@@ -6,7 +6,7 @@ from selenium.webdriver.chrome.webdriver import ChromiumDriver
 
 from config import BASE_URL
 from helpers.logger import log
-from interaction_with_web_pages.user_model import UserModel
+from helpers.custom_types import UserModel
 from typing import Self
 
 

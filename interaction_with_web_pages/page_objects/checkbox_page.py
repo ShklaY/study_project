@@ -1,4 +1,4 @@
-from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
+from helpers.methods_to_interact_with_pages import MethodsToInteractWithPages
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
 import random
@@ -14,8 +14,9 @@ class CheckBoxPage(MethodsToInteractWithPages):
     def __init__(self, driver):
         super().__init__(driver)
         self.menu_bar = MenuBar(self.driver)
+        self.url = f'{self.base_url}/checkbox'
 
-    def click_on_btn_expand_all(self) -> None:
+    def click_on_expand_all_btn(self) -> None:
         self.click_on(CheckBoxPage.BTN_EXPAND_ALL)
 
     def click_on_random_checkboxes(self) -> None:

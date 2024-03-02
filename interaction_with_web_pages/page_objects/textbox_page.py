@@ -1,9 +1,9 @@
 import dataclasses
 
-from interaction_with_web_pages.methods_to_interact_with_pages import MethodsToInteractWithPages
+from helpers.methods_to_interact_with_pages import MethodsToInteractWithPages
 from interaction_with_web_pages.page_objects.menu_bar import MenuBar
 from selenium.webdriver.common.by import By
-from interaction_with_web_pages.user_model import UserModel
+from helpers.custom_types import UserModel
 
 
 @dataclasses.dataclass
@@ -12,6 +12,7 @@ class OutputUserData:
     email: str
     current_address: str
     permanent_address: str
+
 
 class TextBoxPage(MethodsToInteractWithPages):
     TXT_FULL_NAME = (By.CSS_SELECTOR, 'input[id="userName"]')
